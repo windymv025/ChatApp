@@ -1,0 +1,24 @@
+{
+    "sign_in":"Sign In",
+    "sign_up":"Sign Up",
+    "password":"Password",
+    "enter_email":"Enter your email",
+    "enter_password":"Enter your password",
+    "or_continue_with":"Or continue with",
+    "dont_have_account":"Don't have an account?",
+
+    "please_enter_email_valid":"Please enter valid email",
+    "please_enter_password":"Please enter your password",
+    "please_enter_email":"Please enter your email",
+    "please_enter_password_min":"Please enter password minimum 8 characters",
+    "please_enter_your_name":"Please enter your name",
+    "password_dont_match":"Password don't match",
+    "please_enter_otp":"Please Enter OTP in your email",
+    "otp_is_invalid":"OTP is Invalid, please try again",
+
+    "dark":"Dark",
+    "light":"Light",
+
+    "forgot_password":"Forgot Password?",   
+    "enter_email_to_reset":"Enter your email address to we'll send you a OTP code to reset your password"
+}

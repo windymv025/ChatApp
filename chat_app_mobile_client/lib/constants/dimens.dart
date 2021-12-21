@@ -1,7 +1,4 @@
-class Dimens {
-  Dimens._();
-
-  //for all screens
-  static const double horizontalPadding = 12.0;
-  static const double verticalPadding = 12.0;
-}
+const double textSizeButton = 14;
+const double textSizeTag = 12;
+const double textSizeTitle = 16;
+const double textSizePageName = 18;
