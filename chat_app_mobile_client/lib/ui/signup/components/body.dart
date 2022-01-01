@@ -2,17 +2,12 @@ import 'package:chat_app_mobile_client/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'no_account_text.dart';
-import 'sign_in_form.dart';
+import 'already_have_account.dart';
+import 'sign_up_form.dart';
 
-class SignInBody extends StatefulWidget {
-  const SignInBody({Key? key}) : super(key: key);
+class Body extends StatelessWidget {
+  const Body({Key? key}) : super(key: key);
 
-  @override
-  _SignInBodyState createState() => _SignInBodyState();
-}
-
-class _SignInBodyState extends State<SignInBody> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,20 +17,18 @@ class _SignInBodyState extends State<SignInBody> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 100,
-                  child: SvgPicture.asset(Assets.assetsIconsIconLaunch),
-                ),
+                    height: 100,
+                    child: SvgPicture.asset(Assets.assetsIconsIconLaunch)),
                 const SizedBox(
                   height: 25,
                 ),
-                const SignInForm(),
+                const SignUpForm(),
                 const SizedBox(
                   height: 15,
                 ),
-                const NoAccountText(),
+                const AlreadyHaveAccount(),
                 const SizedBox(
                   height: 15,
                 ),
