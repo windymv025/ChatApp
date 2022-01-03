@@ -150,5 +150,8 @@
     "previous" : "Trước",
     "next" : "Tiếp",
     "error_loading_PDF" : "Lỗi tải PDF",
-    "logout" : "Đăng xuất"
+    "logout" : "Đăng xuất",
+    "home":"Trang chủ",
+    "contact":"Danh bạ",
+    "request":"Yêu cầu kết bạn"
 }

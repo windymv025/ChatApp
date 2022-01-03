@@ -24,7 +24,7 @@ class AuthApi {
     return response;
   }
 
-  Future<Contact> auth() async {
+  Future<dynamic> auth() async {
     SharedPreferenceHelper sharedPref = await SharedPreferenceHelper.instance;
     String? token = await sharedPref.authToken;
     final response = await _restClient.post(
@@ -33,6 +33,6 @@ class AuthApi {
         'x-auth-token': token ?? '',
       },
     );
-    return Contact.fromMap(response['user']);
+    return response;
   }
 }

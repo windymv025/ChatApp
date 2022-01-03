@@ -1,19 +1,20 @@
 import 'dart:convert';
 
 class Contact {
-  Contact({
-    required this.id,
-    required this.email,
-    required this.name,
-    required this.imageUrl,
-    required this.createdAt,
-  });
+  Contact(
+      {required this.id,
+      required this.email,
+      required this.name,
+      required this.imageUrl,
+      required this.createdAt,
+      this.isPriority = false});
 
   String id;
   String email;
   String name;
   String imageUrl;
   DateTime createdAt;
+  bool isPriority;
 
   factory Contact.fromJson(String str) => Contact.fromMap(json.decode(str));
 
@@ -25,6 +26,7 @@ class Contact {
         name: json["name"],
         imageUrl: json["image_url"],
         createdAt: DateTime.parse(json["created_at"]),
+        isPriority: json["is_priority"] ?? false,
       );
 
   Map<String, dynamic> toMap() => {
@@ -33,5 +35,6 @@ class Contact {
         "name": name,
         "image_url": imageUrl,
         "created_at": createdAt.toIso8601String(),
+        "is_priority": isPriority,
       };
 }

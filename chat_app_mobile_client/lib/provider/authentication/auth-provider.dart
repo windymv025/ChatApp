@@ -7,6 +7,10 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthProvider extends ChangeNotifier {
+  AuthProvider() {
+    _init();
+  }
+
   late Contact profile;
   AuthApi authApi = AuthApi();
   String message = "";
@@ -17,8 +21,8 @@ class AuthProvider extends ChangeNotifier {
     if (res.containsKey("user")) {
       profile = Contact.fromMap(res["user"]);
 
-      saveToken(res["access_token"]);
-      saveProfile(password);
+      await saveToken(res["access_token"]);
+      await saveProfile(password);
       notifyListeners();
       return true;
     } else {
@@ -33,6 +37,8 @@ class AuthProvider extends ChangeNotifier {
     var res = await authApi.register(email, passHash, name) as Map;
     if (res.containsKey("user")) {
       profile = Contact.fromMap(res["user"]);
+      await saveToken(res["access_token"]);
+      await saveProfile(password);
       notifyListeners();
       return true;
     } else {
@@ -69,18 +75,18 @@ class AuthProvider extends ChangeNotifier {
     return false;
   }
 
-  void saveProfile(String password) async {
+  saveProfile(String password) async {
     var prefs = await SharedPreferenceHelper.instance;
     await prefs.saveProfile(profile);
     await prefs.savePassword(password);
   }
 
-  void saveToken(String token) async {
+  saveToken(String token) async {
     var prefs = await SharedPreferenceHelper.instance;
     await prefs.saveAuthToken(token);
   }
 
-  void loadProfile() async {
+  loadProfile() async {
     var prefs = await SharedPreferenceHelper.instance;
     var profileTemp = await prefs.profile;
     if (profileTemp != null) {
@@ -89,7 +95,7 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  void resetProfile() async {
+  resetProfile() async {
     var prefs = await SharedPreferenceHelper.instance;
     await prefs.removeProfile();
   }
@@ -100,4 +106,6 @@ class AuthProvider extends ChangeNotifier {
     var digest = md5.convert(content);
     return digest.toString();
   }
+
+  void _init() {}
 }

@@ -28,4 +28,8 @@ class Assets {
   /// Assets for assetsImagesIconLaunch
   /// assets/images/iconLaunch.png
   static const String assetsImagesIconLaunch = "assets/images/iconLaunch.png";
+
+  /// Assets for assetsImagesUserIcon
+  /// assets/images/user-icon.png
+  static const String assetsImagesUserIcon = "assets/images/user-icon.png";
 }

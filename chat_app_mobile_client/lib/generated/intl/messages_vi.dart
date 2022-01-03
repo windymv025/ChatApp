@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hoàn tất thông tin cá nhân"),
         "confirm_password":
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
+        "contact": MessageLookupByLibrary.simpleMessage("Danh bạ"),
         "continue_str": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "continue_with":
             MessageLookupByLibrary.simpleMessage("Hoặc đăng nhập bằng"),
@@ -121,6 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn đã có tài khoản? "),
         "higher_beginner":
             MessageLookupByLibrary.simpleMessage("Higher Beginner"),
+        "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "i_best_teaching_who": MessageLookupByLibrary.simpleMessage(
             "Tôi giỏi nhất là dạy những người này"),
         "interests": MessageLookupByLibrary.simpleMessage("Sở thích"),
@@ -188,6 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xếp hạn và nhận xét"),
         "re_enter_your_password":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu"),
+        "request": MessageLookupByLibrary.simpleMessage("Yêu cầu kết bạn"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Lấy lại mật khẩu"),
         "save_changes": MessageLookupByLibrary.simpleMessage("Lưu"),

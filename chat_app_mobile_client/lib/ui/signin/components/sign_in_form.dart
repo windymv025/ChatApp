@@ -43,7 +43,6 @@ class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
     final AuthProvider profile = context.read<AuthProvider>();
-
     return Form(
       key: _formKey,
       child: Column(

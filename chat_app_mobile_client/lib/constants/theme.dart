@@ -14,6 +14,12 @@ final ThemeData themeDataLight = ThemeData(
   brightness: Brightness.light,
   primaryColor: kPrimaryColor,
   primaryColorBrightness: Brightness.light,
+  colorScheme: const ColorScheme.light(
+    primary: kMainBlueColor,
+    onPrimary: kPrimaryColor,
+    secondary: Colors.black54,
+    brightness: Brightness.light,
+  ),
 );
 
 AppBarTheme appBarTheme() {
@@ -69,6 +75,12 @@ final ThemeData themeDataDark = ThemeData(
   fontFamily: FontFamily.productSans,
   primaryColor: kPrimaryColor,
   primaryColorBrightness: Brightness.dark,
+  colorScheme: const ColorScheme.dark(
+    primary: kMainBlueColor,
+    onPrimary: kPrimaryColor,
+    secondary: kLightColor,
+    brightness: Brightness.dark,
+  ),
 );
 
 InputDecorationTheme inputDecorationDarkTheme() {

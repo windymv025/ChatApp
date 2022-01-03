@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Complete profile"),
         "confirm_password":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "contact": MessageLookupByLibrary.simpleMessage("Contact"),
         "continue_str": MessageLookupByLibrary.simpleMessage("Continue"),
         "continue_with":
             MessageLookupByLibrary.simpleMessage("Or continue with"),
@@ -118,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Already have an account? "),
         "higher_beginner":
             MessageLookupByLibrary.simpleMessage("Higher Beginner"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "i_best_teaching_who": MessageLookupByLibrary.simpleMessage(
             "I am best at teaching students who are"),
         "interests": MessageLookupByLibrary.simpleMessage("Interests"),
@@ -184,6 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Rating and Comments"),
         "re_enter_your_password":
             MessageLookupByLibrary.simpleMessage("Re-enter your password"),
+        "request": MessageLookupByLibrary.simpleMessage("Request"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
         "save_changes": MessageLookupByLibrary.simpleMessage("Save changes"),

@@ -149,5 +149,9 @@
     "previous" : "Previous",
     "next" : "Next",
     "error_loading_PDF" : "Error loading PDF",
-    "logout" : "Logout"
+    "logout" : "Logout",
+
+    "home":"Home",
+    "contact":"Contact",
+    "request":"Request"
 }
