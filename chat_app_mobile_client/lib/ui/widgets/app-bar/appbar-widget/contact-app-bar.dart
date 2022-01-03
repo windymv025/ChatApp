@@ -8,20 +8,20 @@ import 'package:chat_app_mobile_client/ui/widgets/button/circle_avatar_button.da
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
-class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const HomeAppBar({
+class ContactAppBar extends StatefulWidget implements PreferredSizeWidget {
+  const ContactAppBar({
     Key? key,
     required this.title,
   }) : super(key: key);
   final String title;
   @override
-  _HomeAppBarState createState() => _HomeAppBarState();
+  _ContactAppBarState createState() => _ContactAppBarState();
 
   @override
   Size get preferredSize => const Size.fromHeight(100);
 }
 
-class _HomeAppBarState extends State<HomeAppBar> {
+class _ContactAppBarState extends State<ContactAppBar> {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = context.watch<AuthProvider>();
@@ -54,10 +54,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
         onTap: (value) {},
         tabs: [
           Tab(
-            text: S.current.tab_priority,
+            text: S.current.tab_friend,
           ),
           Tab(
-            text: S.current.tab_normal,
+            text: S.current.tab_group,
           ),
         ],
       ),

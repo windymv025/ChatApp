@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'contact.dart';
+import 'package:chat_app_mobile_client/models/user.dart';
 
 class Group {
   Group({
@@ -20,7 +20,7 @@ class Group {
   bool isDeleted;
   DateTime joinedAt;
   DateTime? leftAt;
-  Contact userAdded;
+  User userAdded;
   bool isAdmin;
 
   factory Group.fromJson(String str) => Group.fromMap(json.decode(str));
@@ -34,7 +34,7 @@ class Group {
         isDeleted: json["is_deleted"],
         joinedAt: DateTime.parse(json["joined_at"]),
         leftAt: json["left_at"],
-        userAdded: Contact.fromMap(json["user_added"]),
+        userAdded: User.fromMap(json["user_added"]),
         isAdmin: json["is_admin"],
       );
 

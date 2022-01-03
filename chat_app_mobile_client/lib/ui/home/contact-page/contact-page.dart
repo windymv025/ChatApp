@@ -1,20 +1,25 @@
 import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
+import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
+import 'package:chat_app_mobile_client/ui/home/contact-page/tabview/tab-friend.dart';
+import 'package:chat_app_mobile_client/ui/home/contact-page/tabview/tab-group.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
-class ContactPage extends StatefulWidget {
+class ContactPage extends StatelessWidget {
   const ContactPage({Key? key}) : super(key: key);
 
   @override
-  _ContactPageState createState() => _ContactPageState();
-}
-
-class _ContactPageState extends State<ContactPage> {
-  @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = context.watch<AuthProvider>();
-    return Container(
-      child: Text("Contact Page"),
+    final authProvider = Provider.of<AuthProvider>(context);
+    final ContactProvider contactProvider =
+        Provider.of<ContactProvider>(context);
+    return TabBarView(
+      children: [
+        TabFriend(
+          values: contactProvider.getAcceptContacts(authProvider.profile),
+        ),
+        const TabGroup(),
+      ],
     );
   }
 }

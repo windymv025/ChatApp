@@ -153,5 +153,10 @@
 
     "home":"Home",
     "contact":"Contact",
-    "request":"Request"
+    "request":"Request",
+    "tab_priority":"Priority",
+    "tab_normal":"Normal",
+    "tab_friend":"Friend",
+    "tab_group":"Group",
+    "message":"Message"
 }

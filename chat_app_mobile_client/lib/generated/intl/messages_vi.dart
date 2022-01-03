@@ -141,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "light": MessageLookupByLibrary.simpleMessage("Sáng"),
         "list_topics": MessageLookupByLibrary.simpleMessage("Danh sách chủ đề"),
         "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
+        "message": MessageLookupByLibrary.simpleMessage("Tin nhắn"),
         "my_specialties_are":
             MessageLookupByLibrary.simpleMessage("Chuyên môn của tôi"),
         "mylevel": MessageLookupByLibrary.simpleMessage("Cấp độ"),
@@ -208,6 +209,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_up": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),
         "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
+        "tab_friend": MessageLookupByLibrary.simpleMessage("Bạn bè"),
+        "tab_group": MessageLookupByLibrary.simpleMessage("Nhóm"),
+        "tab_normal": MessageLookupByLibrary.simpleMessage("Bình thường"),
+        "tab_priority": MessageLookupByLibrary.simpleMessage("Ưu tiên"),
         "take_video": MessageLookupByLibrary.simpleMessage("Quay video"),
         "theme": MessageLookupByLibrary.simpleMessage("Chủ đề"),
         "total_lesson_time":

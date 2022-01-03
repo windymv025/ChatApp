@@ -14,7 +14,10 @@ class SignInScreen extends StatelessWidget {
         title: Text(S.of(context).sign_in),
         centerTitle: false,
       ),
-      body: const SignInBody(),
+      body: const Padding(
+        padding: EdgeInsets.only(top: 10),
+        child: SignInBody(),
+      ),
     );
   }
 }

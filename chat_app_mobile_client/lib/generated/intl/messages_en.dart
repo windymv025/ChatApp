@@ -138,6 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "list_topics": MessageLookupByLibrary.simpleMessage("List Topics"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "message": MessageLookupByLibrary.simpleMessage("Message"),
         "my_specialties_are":
             MessageLookupByLibrary.simpleMessage("My specialties are"),
         "mylevel": MessageLookupByLibrary.simpleMessage("My level"),
@@ -204,6 +205,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "tab_friend": MessageLookupByLibrary.simpleMessage("Friend"),
+        "tab_group": MessageLookupByLibrary.simpleMessage("Group"),
+        "tab_normal": MessageLookupByLibrary.simpleMessage("Normal"),
+        "tab_priority": MessageLookupByLibrary.simpleMessage("Priority"),
         "take_video": MessageLookupByLibrary.simpleMessage("Take a video"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "total_lesson_time":

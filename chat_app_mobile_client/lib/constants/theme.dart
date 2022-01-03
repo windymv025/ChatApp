@@ -24,10 +24,10 @@ final ThemeData themeDataLight = ThemeData(
 
 AppBarTheme appBarTheme() {
   return const AppBarTheme(
-    color: Colors.white,
+    color: kMainBlueColor,
     elevation: 0,
-    iconTheme: IconThemeData(color: Colors.black),
-    titleTextStyle: pageNameStyle,
+    iconTheme: IconThemeData(color: Colors.white),
+    titleTextStyle: pageNameStyleLight,
   );
 }
 
@@ -67,21 +67,21 @@ InputDecorationTheme inputDecorationTheme() {
 
 //dark theme
 final ThemeData themeDataDark = ThemeData(
-  brightness: Brightness.dark,
-  scaffoldBackgroundColor: Colors.black87,
-  inputDecorationTheme: inputDecorationDarkTheme(),
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  appBarTheme: appBarDarkTheme(),
-  fontFamily: FontFamily.productSans,
-  primaryColor: kPrimaryColor,
-  primaryColorBrightness: Brightness.dark,
-  colorScheme: const ColorScheme.dark(
-    primary: kMainBlueColor,
-    onPrimary: kPrimaryColor,
-    secondary: kLightColor,
     brightness: Brightness.dark,
-  ),
-);
+    scaffoldBackgroundColor: Colors.black87,
+    inputDecorationTheme: inputDecorationDarkTheme(),
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    appBarTheme: appBarDarkTheme(),
+    fontFamily: FontFamily.productSans,
+    primaryColor: kPrimaryColor,
+    primaryColorBrightness: Brightness.dark,
+    colorScheme: const ColorScheme.dark(
+      primary: kMainBlueColor,
+      onPrimary: kPrimaryColor,
+      secondary: kLightColor,
+      brightness: Brightness.dark,
+    ),
+    textTheme: textThemeDark());
 
 InputDecorationTheme inputDecorationDarkTheme() {
   OutlineInputBorder outlineInputBorder = OutlineInputBorder(
@@ -122,13 +122,13 @@ AppBarTheme appBarDarkTheme() {
     color: Colors.black87,
     elevation: 0,
     iconTheme: IconThemeData(color: Colors.white),
-    titleTextStyle: pageNameStyle,
+    titleTextStyle: pageNameStyleDark,
   );
 }
 
 TextTheme textThemeDark() {
   return const TextTheme(
-      headline1: pageNameStyle,
+      headline1: pageNameStyleDark,
       headline2: titleStyle,
       headline3: titleBlueStyle,
       headline4: titleStyleWhite,

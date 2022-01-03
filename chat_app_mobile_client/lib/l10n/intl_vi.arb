@@ -153,5 +153,11 @@
     "logout" : "Đăng xuất",
     "home":"Trang chủ",
     "contact":"Danh bạ",
-    "request":"Yêu cầu kết bạn"
+    "request":"Yêu cầu kết bạn",
+
+    "tab_priority":"Ưu tiên",
+    "tab_normal":"Bình thường",
+    "tab_friend":"Bạn bè",
+    "tab_group":"Nhóm",
+    "message":"Tin nhắn"
 }

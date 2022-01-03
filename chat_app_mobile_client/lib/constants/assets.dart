@@ -29,6 +29,10 @@ class Assets {
   /// assets/images/iconLaunch.png
   static const String assetsImagesIconLaunch = "assets/images/iconLaunch.png";
 
+  /// Assets for assetsImagesNoDataFound
+  /// assets/images/no_data_found.png
+  static const String assetsImagesNoDataFound = "assets/images/no_data_found.png";
+
   /// Assets for assetsImagesUserIcon
   /// assets/images/user-icon.png
   static const String assetsImagesUserIcon = "assets/images/user-icon.png";

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:chat_app_mobile_client/data/network/apis/authentication/auth-api.dart';
 import 'package:chat_app_mobile_client/data/sharedpref/shared_preference_helper.dart';
-import 'package:chat_app_mobile_client/models/contact.dart';
+import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -11,7 +11,7 @@ class AuthProvider extends ChangeNotifier {
     _init();
   }
 
-  late Contact profile;
+  late User profile;
   AuthApi authApi = AuthApi();
   String message = "";
 
@@ -19,7 +19,7 @@ class AuthProvider extends ChangeNotifier {
     var passHash = md5Hash(password);
     var res = await authApi.login(email, passHash) as Map;
     if (res.containsKey("user")) {
-      profile = Contact.fromMap(res["user"]);
+      profile = User.fromMap(res["user"]);
 
       await saveToken(res["access_token"]);
       await saveProfile(password);
@@ -36,7 +36,7 @@ class AuthProvider extends ChangeNotifier {
     var passHash = md5Hash(password);
     var res = await authApi.register(email, passHash, name) as Map;
     if (res.containsKey("user")) {
-      profile = Contact.fromMap(res["user"]);
+      profile = User.fromMap(res["user"]);
       await saveToken(res["access_token"]);
       await saveProfile(password);
       notifyListeners();
@@ -51,7 +51,7 @@ class AuthProvider extends ChangeNotifier {
   Future<bool> auth() async {
     var res = await authApi.auth() as Map;
     if (res.containsKey("user")) {
-      profile = Contact.fromMap(res["user"]);
+      profile = User.fromMap(res["user"]);
       notifyListeners();
       return true;
     } else {

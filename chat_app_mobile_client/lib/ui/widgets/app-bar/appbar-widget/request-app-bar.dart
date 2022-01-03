@@ -1,6 +1,4 @@
 import 'package:chat_app_mobile_client/constants/assets.dart';
-import 'package:chat_app_mobile_client/constants/styles.dart';
-import 'package:chat_app_mobile_client/generated/l10n.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
 import 'package:chat_app_mobile_client/ui/profile/profile-screen.dart';
@@ -8,20 +6,20 @@ import 'package:chat_app_mobile_client/ui/widgets/button/circle_avatar_button.da
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
-class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const HomeAppBar({
+class RequestAppBar extends StatefulWidget implements PreferredSizeWidget {
+  const RequestAppBar({
     Key? key,
     required this.title,
   }) : super(key: key);
   final String title;
   @override
-  _HomeAppBarState createState() => _HomeAppBarState();
+  _RequestAppBarState createState() => _RequestAppBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(100);
+  Size get preferredSize => AppBar().preferredSize;
 }
 
-class _HomeAppBarState extends State<HomeAppBar> {
+class _RequestAppBarState extends State<RequestAppBar> {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = context.watch<AuthProvider>();
@@ -46,21 +44,6 @@ class _HomeAppBarState extends State<HomeAppBar> {
               size: 30,
             ))
       ],
-      bottom: TabBar(
-        labelColor: Colors.white,
-        labelStyle: titleStyleWhite,
-        indicatorColor: Colors.white,
-        automaticIndicatorColorAdjustment: true,
-        onTap: (value) {},
-        tabs: [
-          Tab(
-            text: S.current.tab_priority,
-          ),
-          Tab(
-            text: S.current.tab_normal,
-          ),
-        ],
-      ),
     );
   }
 

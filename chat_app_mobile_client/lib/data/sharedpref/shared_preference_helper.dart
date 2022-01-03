@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:chat_app_mobile_client/models/contact.dart';
+import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants/preferences.dart';
@@ -50,13 +50,13 @@ class SharedPreferenceHelper {
   }
 
   //profile:--------------------------------------------------------------------
-  Future<bool> saveProfile(Contact profile) async {
+  Future<bool> saveProfile(User profile) async {
     return _sharedPreference!.setString(Preferences.profile, profile.toJson());
   }
 
-  Future<Contact?> get profile async {
+  Future<User?> get profile async {
     if (_sharedPreference?.getString(Preferences.profile) == null) return null;
-    return Contact.fromJson(_sharedPreference!.getString(Preferences.profile)!);
+    return User.fromJson(_sharedPreference!.getString(Preferences.profile)!);
   }
 
   Future<bool> removeProfile() async {

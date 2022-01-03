@@ -13,8 +13,12 @@ const TextStyle titleBlueStyle = TextStyle(
     fontWeight: FontWeight.w700);
 const TextStyle titleStyleWhite = TextStyle(
     color: Colors.white, fontSize: textSizeTitle, fontWeight: FontWeight.w500);
-const TextStyle pageNameStyle = TextStyle(
-    color: kMainBlueColor,
+const TextStyle pageNameStyleLight = TextStyle(
+    color: Colors.white,
+    fontSize: textSizePageName,
+    fontWeight: FontWeight.bold);
+const TextStyle pageNameStyleDark = TextStyle(
+    color: Colors.white,
     fontSize: textSizePageName,
     fontWeight: FontWeight.bold);
 const TextStyle tileCountDownStyle = TextStyle(

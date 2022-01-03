@@ -1,4 +1,6 @@
 import 'package:chat_app_mobile_client/constants/colors.dart';
+import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
+import 'package:chat_app_mobile_client/provider/group/group-provider.dart';
 import 'package:chat_app_mobile_client/provider/home/home-provider.dart';
 import 'package:chat_app_mobile_client/provider/theme/theme_provider.dart';
 import 'package:chat_app_mobile_client/ui/home/home-screen.dart';
@@ -44,6 +46,8 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => authProfile),
         ChangeNotifierProvider(create: (context) => homeProvider),
+        ChangeNotifierProvider(create: (context) => ContactProvider()),
+        ChangeNotifierProvider(create: (context) => GroupProvider()),
       ],
       child: MaterialApp(
         title: 'Chat App',

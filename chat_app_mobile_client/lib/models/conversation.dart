@@ -1,10 +1,10 @@
-import 'dart:convert';
+import 'package:chat_app_mobile_client/models/contact.dart';
+import 'package:chat_app_mobile_client/models/user.dart';
 
 import 'group.dart';
-import 'user.dart';
 
-class Message {
-  Message({
+class Conversation {
+  Conversation({
     required this.id,
     required this.sender,
     this.receiver,
@@ -26,15 +26,12 @@ class Message {
   bool isRemoved;
   bool isNotification;
 
-  factory Message.fromJson(String str) => Message.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory Message.fromMap(Map<String, dynamic> json) => Message(
+  factory Conversation.fromMap(Map<String, dynamic> json) => Conversation(
         id: json["_id"],
         sender: User.fromMap(json["sender"]),
-        receiver: json["receiver"],
-        group: Group.fromMap(json["group"]),
+        receiver:
+            json["receiver"] == null ? null : User.fromMap(json["receiver"]),
+        group: json["group"] == null ? null : Group.fromMap(json["group"]),
         content: json["content"],
         type: json["type"],
         sentAt: DateTime.parse(json["sent_at"]),
@@ -45,8 +42,8 @@ class Message {
   Map<String, dynamic> toMap() => {
         "_id": id,
         "sender": sender.toMap(),
-        "receiver": receiver,
-        "group": group?.toMap(),
+        "receiver": receiver == null ? null : receiver!.toMap(),
+        "group": group == null ? null : group!.toMap(),
         "content": content,
         "type": type,
         "sent_at": sentAt.toIso8601String(),

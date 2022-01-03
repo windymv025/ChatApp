@@ -1389,6 +1389,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Priority`
+  String get tab_priority {
+    return Intl.message(
+      'Priority',
+      name: 'tab_priority',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal`
+  String get tab_normal {
+    return Intl.message(
+      'Normal',
+      name: 'tab_normal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Friend`
+  String get tab_friend {
+    return Intl.message(
+      'Friend',
+      name: 'tab_friend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group`
+  String get tab_group {
+    return Intl.message(
+      'Group',
+      name: 'tab_group',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Message`
+  String get message {
+    return Intl.message(
+      'Message',
+      name: 'message',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

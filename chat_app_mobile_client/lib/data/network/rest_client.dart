@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:chat_app_mobile_client/data/sharedpref/shared_preference_helper.dart';
 import 'package:http/http.dart' as http;
 
 import 'constants/endpoints.dart';
@@ -79,5 +80,11 @@ class RestClient {
     }
 
     return _decoder.convert(res);
+  }
+
+  Future<String?> getToken() async {
+    SharedPreferenceHelper sharedPref = await SharedPreferenceHelper.instance;
+    String? token = await sharedPref.authToken;
+    return token;
   }
 }

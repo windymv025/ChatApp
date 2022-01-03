@@ -1,40 +1,39 @@
-import 'dart:convert';
+import 'package:chat_app_mobile_client/models/user.dart';
 
 class Contact {
-  Contact(
-      {required this.id,
-      required this.email,
-      required this.name,
-      required this.imageUrl,
-      required this.createdAt,
-      this.isPriority = false});
+  Contact({
+    required this.id,
+    required this.userRequested,
+    required this.userRequestedTo,
+    required this.isAccepted,
+    this.removedAt,
+    required this.isPriority,
+  });
 
   String id;
-  String email;
-  String name;
-  String imageUrl;
-  DateTime createdAt;
+  User userRequested;
+  User userRequestedTo;
+  bool isAccepted;
+  DateTime? removedAt;
   bool isPriority;
-
-  factory Contact.fromJson(String str) => Contact.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
 
   factory Contact.fromMap(Map<String, dynamic> json) => Contact(
         id: json["_id"],
-        email: json["email"],
-        name: json["name"],
-        imageUrl: json["image_url"],
-        createdAt: DateTime.parse(json["created_at"]),
-        isPriority: json["is_priority"] ?? false,
+        userRequested: User.fromMap(json["user_requested"]),
+        userRequestedTo: User.fromMap(json["user_requested_to"]),
+        isAccepted: json["is_accepted"],
+        removedAt: json["removed_at"] != null
+            ? DateTime.parse(json["removed_at"])
+            : null,
+        isPriority: json["is_priority"],
       );
 
   Map<String, dynamic> toMap() => {
         "_id": id,
-        "email": email,
-        "name": name,
-        "image_url": imageUrl,
-        "created_at": createdAt.toIso8601String(),
+        "user_requested": userRequested.toMap(),
+        "user_requested_to": userRequestedTo.toMap(),
+        "is_accepted": isAccepted,
+        "removed_at": removedAt,
         "is_priority": isPriority,
       };
 }

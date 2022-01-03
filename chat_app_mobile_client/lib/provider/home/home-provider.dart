@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class HomeProvider extends ChangeNotifier {
   static final List<String> titles = [
-    S.current.home,
+    S.current.message,
     S.current.contact,
     S.current.request,
     S.current.setting,

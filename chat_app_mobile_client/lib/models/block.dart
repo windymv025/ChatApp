@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:chat_app_mobile_client/models/contact.dart';
+import 'package:chat_app_mobile_client/models/user.dart';
 
 class Block {
   Block({
@@ -13,8 +14,8 @@ class Block {
   });
 
   String id;
-  Contact user;
-  Contact userBlocked;
+  User user;
+  User userBlocked;
   DateTime blockedAt;
   bool isRemoved;
   DateTime updatedAt;
@@ -25,8 +26,8 @@ class Block {
 
   factory Block.fromMap(Map<String, dynamic> json) => Block(
         id: json["_id"],
-        user: Contact.fromMap(json["user"]),
-        userBlocked: Contact.fromMap(json["user_blocked"]),
+        user: User.fromMap(json["user"]),
+        userBlocked: User.fromMap(json["user_blocked"]),
         blockedAt: DateTime.parse(json["blocked_at"]),
         isRemoved: json["is_removed"],
         updatedAt: DateTime.parse(json["updated_at"]),
