@@ -2,44 +2,46 @@ import 'package:chat_app_mobile_client/constants/strings.dart';
 import 'package:chat_app_mobile_client/constants/theme.dart';
 import 'package:chat_app_mobile_client/data/sharedpref/shared_preference_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  SharedPreferenceHelper? _prefHelper;
+  // prototype
+  static final Map<String, ThemeData> _themes = {
+    kStringLightTheme: themeDataLight,
+    kStringDarkTheme: themeDataDark,
+  };
+  late SharedPreferenceHelper _prefHelper;
 
-  ThemeData _themeMode = themeDataLight;
+  ThemeData _themeMode = _themes[kStringLightTheme]!;
   String typeName = kStringLightTheme;
   ThemeProvider() {
     _loadTheme();
   }
 
   void _loadTheme() async {
-    var prefs = await SharedPreferences.getInstance();
-    _prefHelper = SharedPreferenceHelper(prefs);
+    _prefHelper = await SharedPreferenceHelper.instance;
 
-    if (_prefHelper?.isDarkMode == true) {
-      _themeMode = themeDataDark;
+    if (_prefHelper.isDarkMode == true) {
       typeName = kStringDarkTheme;
     } else {
-      _themeMode = themeDataLight;
       typeName = kStringLightTheme;
     }
+    _themeMode = _themes[typeName]!;
     notifyListeners();
   }
 
   ThemeData get themeMode => _themeMode;
 
   void setThemeDark() async {
-    _themeMode = themeDataDark;
     typeName = kStringDarkTheme;
-    await _prefHelper?.changeBrightnessToDark(true);
+    _themeMode = _themes[typeName]!;
+    await _prefHelper.changeBrightnessToDark(true);
     notifyListeners();
   }
 
   void setThemeLight() async {
-    _themeMode = themeDataLight;
     typeName = kStringLightTheme;
-    await _prefHelper?.changeBrightnessToDark(false);
+    _themeMode = _themes[typeName]!;
+    await _prefHelper.changeBrightnessToDark(false);
     notifyListeners();
   }
 }

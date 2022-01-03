@@ -31,8 +31,11 @@ dependencies:
   video_player: ^2.2.7 #video player
 
   
-  # download PDF
+  # network
   http: ^0.13.4
+
+  #hash pass
+  crypto: ^3.0.1
 
 dev_dependencies:
   flutter_test:

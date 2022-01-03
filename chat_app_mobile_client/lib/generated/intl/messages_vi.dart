@@ -129,6 +129,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "introduction": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
         "introduction_video":
             MessageLookupByLibrary.simpleMessage("Video giới thiệu bản thân"),
+        "invalid_credentials": MessageLookupByLibrary.simpleMessage(
+            "Email hoặc mật khẩu không đúng"),
         "languages": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "languages_speak":
             MessageLookupByLibrary.simpleMessage("Ngôn ngữ bạn nói"),
@@ -157,6 +159,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hãy chọn ngày phù hợp"),
         "please_choose_a_date":
             MessageLookupByLibrary.simpleMessage("Hãy chọn một ngày phù hợp"),
+        "please_enter_conform_password":
+            MessageLookupByLibrary.simpleMessage("Hãy nhập lại mật khẩu"),
         "please_enter_email":
             MessageLookupByLibrary.simpleMessage("Hãy nhập email của bạn"),
         "please_enter_email_valid":
@@ -166,7 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "please_enter_password":
             MessageLookupByLibrary.simpleMessage("Hãy nhập mật khẩu của bạn"),
         "please_enter_password_min":
-            MessageLookupByLibrary.simpleMessage("Mật khẩu tối thiểu 8 ký tự"),
+            MessageLookupByLibrary.simpleMessage("Mật khẩu tối thiểu 6 ký tự"),
         "please_enter_your_name":
             MessageLookupByLibrary.simpleMessage("Hãy nhập tên của bạn"),
         "please_select_country":

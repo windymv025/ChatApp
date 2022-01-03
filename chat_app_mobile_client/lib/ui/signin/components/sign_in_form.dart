@@ -1,6 +1,8 @@
+import 'package:chat_app_mobile_client/constants/colors.dart';
 import 'package:chat_app_mobile_client/constants/strings.dart';
 import 'package:chat_app_mobile_client/generated/l10n.dart';
-import 'package:chat_app_mobile_client/provider/profile/profile_provider.dart';
+import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
+import 'package:chat_app_mobile_client/ui/home/home-screen.dart';
 import 'package:chat_app_mobile_client/ui/widgets/custom_suffix_icon.dart';
 import 'package:chat_app_mobile_client/ui/widgets/default_button.dart';
 import 'package:chat_app_mobile_client/ui/widgets/form_error.dart';
@@ -20,6 +22,7 @@ class _SignInFormState extends State<SignInForm> {
   String? email;
   String? password;
   List<String> errors = [];
+  bool isLoginPressed = false;
 
   void addError(String error) {
     if (!errors.contains(error)) {
@@ -39,7 +42,7 @@ class _SignInFormState extends State<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    final ProfileProvider profile = context.read<ProfileProvider>();
+    final AuthProvider profile = context.read<AuthProvider>();
 
     return Form(
       key: _formKey,
@@ -57,19 +60,34 @@ class _SignInFormState extends State<SignInForm> {
           const SizedBox(
             height: 10,
           ),
-          DefaultButton(
-            text: S.current.sign_in,
-            press: () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                // if all are valid then go to success screen
-                DeviceUtils.hideKeyboard(context);
-                // Navigator.pushNamedAndRemoveUntil(
-                //     context, HomeScreen.routeName, (route) => false);
-                // profile.copyProfile(kProfile);
-              }
-            },
-          ),
+          isLoginPressed
+              ? CircularProgressIndicator(
+                  valueColor: const AlwaysStoppedAnimation(kMainBlueColor),
+                  backgroundColor: Colors.grey[200],
+                )
+              : DefaultButton(
+                  text: S.current.sign_in,
+                  press: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      // if all are valid then go to success screen
+                      DeviceUtils.hideKeyboard(context);
+                      setState(() {
+                        isLoginPressed = true;
+                        profile.login(email!, password!).then((value) {
+                          if (value) {
+                            Navigator.of(context).pushReplacementNamed(
+                              HomeScreen.routeName,
+                            );
+                          } else {
+                            addError(S.current.invalid_credentials);
+                            isLoginPressed = false;
+                          }
+                        });
+                      });
+                    }
+                  },
+                ),
         ],
       ),
     );
@@ -80,21 +98,10 @@ class _SignInFormState extends State<SignInForm> {
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(S.current.please_enter_email);
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(S.current.please_enter_email_valid);
-        }
+        checkEmail(value);
       },
       validator: (value) {
-        if (value!.isEmpty) {
-          addError(S.current.please_enter_email);
-          return "";
-        } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(S.current.please_enter_email_valid);
-          return "";
-        }
-        return null;
+        return value != null ? checkEmail(value) : null;
       },
       decoration: InputDecoration(
         label: const Text("Email"),
@@ -110,22 +117,11 @@ class _SignInFormState extends State<SignInForm> {
       obscureText: true,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(S.current.please_enter_password);
-        } else if (value.length >= 8) {
-          removeError(S.current.please_enter_password_min);
-        }
+        checkPassword(value);
         return;
       },
       validator: (value) {
-        if (value == null || value.isEmpty) {
-          addError(S.current.please_enter_password);
-          return "";
-        } else if (value.length < 8) {
-          addError(S.current.please_enter_password_min);
-          return "";
-        }
-        return null;
+        return value != null ? checkPassword(value) : null;
       },
       decoration: InputDecoration(
         label: Text(S.current.password),
@@ -134,5 +130,43 @@ class _SignInFormState extends State<SignInForm> {
         suffixIcon: const CustomSurffixIcon(icon: Icons.lock_outline_rounded),
       ),
     );
+  }
+
+  String? checkEmail(String value) {
+    bool isError = false;
+    if (value.isNotEmpty) {
+      removeError(S.current.please_enter_email);
+      isError = false;
+    } else {
+      addError(S.current.please_enter_email);
+      isError = true;
+    }
+    if (emailValidatorRegExp.hasMatch(value) || value.isEmpty) {
+      removeError(S.current.please_enter_email_valid);
+      isError = false;
+    } else {
+      addError(S.current.please_enter_email_valid);
+      isError = true;
+    }
+    return isError ? "" : null;
+  }
+
+  String? checkPassword(String value) {
+    bool isError = false;
+    if (value.isNotEmpty) {
+      removeError(S.current.please_enter_password);
+      isError = false;
+    } else {
+      addError(S.current.please_enter_password);
+      isError = true;
+    }
+    if (value.length >= 6 || value.isEmpty) {
+      removeError(S.current.please_enter_password_min);
+      isError = false;
+    } else {
+      addError(S.current.please_enter_password_min);
+      isError = true;
+    }
+    return isError ? "" : null;
   }
 }

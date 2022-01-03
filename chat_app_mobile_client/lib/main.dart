@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 
 import 'constants/theme.dart';
 import 'generated/l10n.dart';
+import 'provider/authentication/auth-provider.dart';
 import 'provider/language/language_profile.dart';
-import 'provider/profile/profile_provider.dart';
 import 'ui/signin/signin_screen.dart';
 import 'utils/routes/routes.dart';
 
@@ -28,7 +28,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ProfileProvider profile = ProfileProvider();
+  AuthProvider authProfile = AuthProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
     LanguageProfile languageProfile = Provider.of<LanguageProfile>(context);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => profile),
+        ChangeNotifierProvider(create: (context) => authProfile),
       ],
       child: MaterialApp(
         title: 'Chat App',

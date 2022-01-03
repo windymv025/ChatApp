@@ -150,6 +150,16 @@ class S {
     );
   }
 
+  /// `Please enter conform password`
+  String get please_enter_conform_password {
+    return Intl.message(
+      'Please enter conform password',
+      name: 'please_enter_conform_password',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please enter your email`
   String get please_enter_email {
     return Intl.message(
@@ -160,10 +170,10 @@ class S {
     );
   }
 
-  /// `Please enter password minimum 8 characters`
+  /// `Please enter password minimum 6 characters`
   String get please_enter_password_min {
     return Intl.message(
-      'Please enter password minimum 8 characters',
+      'Please enter password minimum 6 characters',
       name: 'please_enter_password_min',
       desc: '',
       args: [],
@@ -205,6 +215,16 @@ class S {
     return Intl.message(
       'OTP is Invalid, please try again',
       name: 'otp_is_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email or Password invalid`
+  String get invalid_credentials {
+    return Intl.message(
+      'Email or Password invalid',
+      name: 'invalid_credentials',
       desc: '',
       args: [],
     );

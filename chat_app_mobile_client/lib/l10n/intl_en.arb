@@ -10,12 +10,14 @@
 
     "please_enter_email_valid":"Please enter valid email",
     "please_enter_password":"Please enter your password",
+    "please_enter_conform_password":"Please enter conform password",
     "please_enter_email":"Please enter your email",
-    "please_enter_password_min":"Please enter password minimum 8 characters",
+    "please_enter_password_min":"Please enter password minimum 6 characters",
     "please_enter_your_name":"Please enter your name",
     "password_dont_match":"Password don't match",
     "please_enter_otp":"Please Enter OTP in your email",
     "otp_is_invalid":"OTP is Invalid, please try again",
+    "invalid_credentials":"Email or Password invalid",
 
     "dark":"Dark",
     "light":"Light",

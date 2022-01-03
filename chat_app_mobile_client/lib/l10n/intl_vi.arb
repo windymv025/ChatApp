@@ -11,11 +11,12 @@
     "please_enter_email_valid":"Hãy nhập email hợp lệ",
     "please_enter_password":"Hãy nhập mật khẩu của bạn",
     "please_enter_email":"Hãy nhập email của bạn",
-    "please_enter_password_min":"Mật khẩu tối thiểu 8 ký tự",
+    "please_enter_password_min":"Mật khẩu tối thiểu 6 ký tự",
     "please_enter_your_name":"Hãy nhập tên của bạn",
     "password_dont_match":"Mật khẩu không khớp",
     "please_enter_otp":"Hãy nhập mã OTP đã được gởi trong email của bạn",
     "otp_is_invalid":"OTP không hợp lệ, xin vui lòng thử lại",
+    "please_enter_conform_password":"Hãy nhập lại mật khẩu",
 
     "dark":"Tối",
     "light":"Sáng",
@@ -91,6 +92,7 @@
     "submit":"Gửi",
     "enter_OTP":"Nhập mã OTP trong email của bạn",
     "check_email_str":"Kiểm tra email của bạn để nhận mã OTP",
+    "invalid_credentials":"Email hoặc mật khẩu không đúng",
 
     "type_message":"Nhập tin nhắn",
     "delete":"Xóa",

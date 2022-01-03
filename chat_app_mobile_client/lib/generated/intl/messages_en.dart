@@ -126,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "introduction": MessageLookupByLibrary.simpleMessage("Introduction"),
         "introduction_video":
             MessageLookupByLibrary.simpleMessage("Introduction video"),
+        "invalid_credentials":
+            MessageLookupByLibrary.simpleMessage("Email or Password invalid"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "languages_speak":
             MessageLookupByLibrary.simpleMessage("Languages I speak"),
@@ -153,6 +155,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_date": MessageLookupByLibrary.simpleMessage("Pick your date"),
         "please_choose_a_date":
             MessageLookupByLibrary.simpleMessage("Please choose a date"),
+        "please_enter_conform_password": MessageLookupByLibrary.simpleMessage(
+            "Please enter conform password"),
         "please_enter_email":
             MessageLookupByLibrary.simpleMessage("Please enter your email"),
         "please_enter_email_valid":
@@ -162,7 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "please_enter_password":
             MessageLookupByLibrary.simpleMessage("Please enter your password"),
         "please_enter_password_min": MessageLookupByLibrary.simpleMessage(
-            "Please enter password minimum 8 characters"),
+            "Please enter password minimum 6 characters"),
         "please_enter_your_name":
             MessageLookupByLibrary.simpleMessage("Please enter your name"),
         "please_select_country":
