@@ -20,4 +20,11 @@ class GroupProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
+
+  void createGroup(String name) {
+    _groupApi.createGroup(name).then((group) {
+      _groups.add(Group.fromMap(group));
+      notifyListeners();
+    });
+  }
 }

@@ -159,5 +159,11 @@
     "tab_normal":"Bình thường",
     "tab_friend":"Bạn bè",
     "tab_group":"Nhóm",
-    "message":"Tin nhắn"
+    "message":"Tin nhắn",
+    "accept":"Chấp nhận",
+    "create_group":"Tạo nhóm mới",
+    "enter_group_name":"Nhập tên nhóm",
+    "name_group":"Tên nhóm",
+    "account":"Tài khoản",
+    "change_password":"Đổi mật khẩu"
 }

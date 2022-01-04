@@ -1439,6 +1439,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Accept`
+  String get accept {
+    return Intl.message(
+      'Accept',
+      name: 'accept',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a new group`
+  String get create_group {
+    return Intl.message(
+      'Create a new group',
+      name: 'create_group',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter group name`
+  String get enter_group_name {
+    return Intl.message(
+      'Enter group name',
+      name: 'enter_group_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group name`
+  String get name_group {
+    return Intl.message(
+      'Group name',
+      name: 'name_group',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message(
+      'Account',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change password`
+  String get change_password {
+    return Intl.message(
+      'Change password',
+      name: 'change_password',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

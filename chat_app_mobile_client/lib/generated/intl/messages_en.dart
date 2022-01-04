@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Seconds": MessageLookupByLibrary.simpleMessage("Seconds"),
         "Select_your_country":
             MessageLookupByLibrary.simpleMessage("Select your Country"),
+        "accept": MessageLookupByLibrary.simpleMessage("Accept"),
+        "account": MessageLookupByLibrary.simpleMessage("Account"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "approval": MessageLookupByLibrary.simpleMessage("Approval"),
@@ -51,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "birthday": MessageLookupByLibrary.simpleMessage("Birthday"),
         "booking_now": MessageLookupByLibrary.simpleMessage("Booking now"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "change_password":
+            MessageLookupByLibrary.simpleMessage("Change password"),
         "check_email_str": MessageLookupByLibrary.simpleMessage(
             "Check your email then enter the OTP code below"),
         "choose_language":
@@ -67,6 +71,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Or continue with"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "course_length": MessageLookupByLibrary.simpleMessage("Course Length"),
+        "create_group":
+            MessageLookupByLibrary.simpleMessage("Create a new group"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "dont_have_account":
@@ -77,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter your email"),
         "enter_email_to_reset": MessageLookupByLibrary.simpleMessage(
             "Enter your email address to we\'ll send you a OTP code to reset your password"),
+        "enter_group_name":
+            MessageLookupByLibrary.simpleMessage("Enter group name"),
         "enter_lesson_room":
             MessageLookupByLibrary.simpleMessage("Enter lesson room"),
         "enter_new_password":
@@ -142,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "my_specialties_are":
             MessageLookupByLibrary.simpleMessage("My specialties are"),
         "mylevel": MessageLookupByLibrary.simpleMessage("My level"),
+        "name_group": MessageLookupByLibrary.simpleMessage("Group name"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no_reviews_yet":
             MessageLookupByLibrary.simpleMessage("No reviews yet"),

@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Seconds": MessageLookupByLibrary.simpleMessage("Giây"),
         "Select_your_country":
             MessageLookupByLibrary.simpleMessage("Chọn quốc gia của bạn"),
+        "accept": MessageLookupByLibrary.simpleMessage("Chấp nhận"),
+        "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "approval": MessageLookupByLibrary.simpleMessage("Sự cấp thuận"),
@@ -52,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "booking_now":
             MessageLookupByLibrary.simpleMessage("Đặt lịch học ngay"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
+        "change_password": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
         "check_email_str": MessageLookupByLibrary.simpleMessage(
             "Kiểm tra email của bạn để nhận mã OTP"),
         "choose_language":
@@ -69,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "country": MessageLookupByLibrary.simpleMessage("Quốc gia"),
         "course_length":
             MessageLookupByLibrary.simpleMessage("Thời lượng khóa học"),
+        "create_group": MessageLookupByLibrary.simpleMessage("Tạo nhóm mới"),
         "dark": MessageLookupByLibrary.simpleMessage("Tối"),
         "delete": MessageLookupByLibrary.simpleMessage("Xóa"),
         "dont_have_account":
@@ -80,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập email của bạn"),
         "enter_email_to_reset": MessageLookupByLibrary.simpleMessage(
             "Hãy nhập địa chỉ Email của bạn, chúng tôi sẽ gửi mã OTP cho bạn để thiết lập lại mật khẩu"),
+        "enter_group_name":
+            MessageLookupByLibrary.simpleMessage("Nhập tên nhóm"),
         "enter_lesson_room":
             MessageLookupByLibrary.simpleMessage("Vào phòng học"),
         "enter_new_password":
@@ -145,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "my_specialties_are":
             MessageLookupByLibrary.simpleMessage("Chuyên môn của tôi"),
         "mylevel": MessageLookupByLibrary.simpleMessage("Cấp độ"),
+        "name_group": MessageLookupByLibrary.simpleMessage("Tên nhóm"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp"),
         "no_reviews_yet":
             MessageLookupByLibrary.simpleMessage("Chưa có đánh giá"),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:chat_app_mobile_client/data/network/apis/authentication/auth-api.dart';
 import 'package:chat_app_mobile_client/data/sharedpref/shared_preference_helper.dart';
@@ -7,6 +8,8 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthProvider extends ChangeNotifier {
+  File? imageFile;
+
   AuthProvider() {
     _init();
   }
@@ -100,6 +103,13 @@ class AuthProvider extends ChangeNotifier {
     await prefs.removeProfile();
   }
 
+  void logout() async {
+    var prefs = await SharedPreferenceHelper.instance;
+    await prefs.removeProfile();
+    await prefs.removeAuthToken();
+    notifyListeners();
+  }
+
   String md5Hash(String password) {
     // return password;
     var content = utf8.encode(password);
@@ -108,4 +118,8 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void _init() {}
+
+  void updateProfile() {
+    //TODO: update profile
+  }
 }

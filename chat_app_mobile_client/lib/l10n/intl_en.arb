@@ -158,5 +158,11 @@
     "tab_normal":"Normal",
     "tab_friend":"Friend",
     "tab_group":"Group",
-    "message":"Message"
+    "message":"Message",
+    "accept":"Accept",
+    "create_group":"Create a new group",
+    "enter_group_name":"Enter group name",
+    "name_group":"Group name",
+    "account":"Account",
+    "change_password":"Change password"
 }

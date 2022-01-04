@@ -26,7 +26,7 @@ class ContactProvider extends ChangeNotifier {
     _profile ??= profile;
     final List<Contact> _acceptContacts = [];
     for (var item in _contacts) {
-      if (item.isAccepted && item.userRequested.id == _profile!.id) {
+      if (item.isAccepted) {
         _acceptContacts.add(item);
       }
     }
@@ -50,5 +50,12 @@ class ContactProvider extends ChangeNotifier {
     if (_p != null) {
       _profile = _p;
     }
+  }
+
+  void acceptContact(Contact contact) {
+    _contactApi.acceptContact(contact.id);
+    _contacts.firstWhere((element) => element.id == contact.id).isAccepted =
+        true;
+    notifyListeners();
   }
 }

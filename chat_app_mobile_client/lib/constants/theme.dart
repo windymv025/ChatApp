@@ -10,7 +10,7 @@ final ThemeData themeDataLight = ThemeData(
   inputDecorationTheme: inputDecorationTheme(),
   visualDensity: VisualDensity.adaptivePlatformDensity,
   appBarTheme: appBarTheme(),
-  fontFamily: FontFamily.productSans,
+  fontFamily: FontFamily.roboto,
   brightness: Brightness.light,
   primaryColor: kPrimaryColor,
   primaryColorBrightness: Brightness.light,
@@ -72,7 +72,7 @@ final ThemeData themeDataDark = ThemeData(
     inputDecorationTheme: inputDecorationDarkTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     appBarTheme: appBarDarkTheme(),
-    fontFamily: FontFamily.productSans,
+    fontFamily: FontFamily.roboto,
     primaryColor: kPrimaryColor,
     primaryColorBrightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(

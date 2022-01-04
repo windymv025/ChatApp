@@ -25,6 +25,14 @@ class Assets {
   /// assets/icons/icon_launch.svg
   static const String assetsIconsIconLaunch = "assets/icons/icon_launch.svg";
 
+  /// Assets for assetsIconsUkFlat
+  /// assets/icons/uk_flat.svg
+  static const String assetsIconsUkFlat = "assets/icons/uk_flat.svg";
+
+  /// Assets for assetsIconsVnFlat
+  /// assets/icons/vn_flat.svg
+  static const String assetsIconsVnFlat = "assets/icons/vn_flat.svg";
+
   /// Assets for assetsImagesIconLaunch
   /// assets/images/iconLaunch.png
   static const String assetsImagesIconLaunch = "assets/images/iconLaunch.png";

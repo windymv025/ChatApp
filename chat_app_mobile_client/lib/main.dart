@@ -1,4 +1,3 @@
-import 'package:chat_app_mobile_client/constants/colors.dart';
 import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
 import 'package:chat_app_mobile_client/provider/group/group-provider.dart';
 import 'package:chat_app_mobile_client/provider/home/home-provider.dart';
@@ -53,7 +52,7 @@ class _MyAppState extends State<MyApp> {
         title: 'Chat App',
         theme: themeModel.themeMode,
         darkTheme: themeDataDark,
-        themeMode: ThemeMode.light,
+        themeMode: ThemeMode.system,
         home: const SignInScreen(),
         routes: routes,
         locale: languageProfile.locale,

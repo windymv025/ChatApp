@@ -5,6 +5,7 @@ import 'package:chat_app_mobile_client/ui/home/contact-page/contact-page.dart';
 import 'package:chat_app_mobile_client/ui/home/request-page/request-page.dart';
 import 'package:chat_app_mobile_client/ui/home/setting-page/setting-page.dart';
 import 'package:chat_app_mobile_client/ui/widgets/app-bar/app-bar-factory.dart';
+import 'package:chat_app_mobile_client/ui/widgets/dialog/add_group_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
@@ -45,15 +46,15 @@ class _HomeScreenState extends State<HomeScreen> {
               label: HomeProvider.titles[0],
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.contact_phone),
+              icon: const Icon(Icons.contact_phone_rounded),
               label: HomeProvider.titles[1],
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.group_add),
+              icon: const Icon(Icons.person_add_alt_1_rounded),
               label: HomeProvider.titles[2],
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(Icons.settings_rounded),
               label: HomeProvider.titles[3],
             ),
           ],
@@ -68,10 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: homeProvider.pageIndex < 2
             ? FloatingActionButton(
                 backgroundColor: kMainBlueColor,
-                onPressed: () {
-                  //TODO: add new group
-                },
-                child: const Icon(Icons.groups_sharp,
+                onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => const AddGroupDialog()),
+                child: const Icon(Icons.group_add_rounded,
                     size: 30, color: Colors.white),
               )
             : null,
