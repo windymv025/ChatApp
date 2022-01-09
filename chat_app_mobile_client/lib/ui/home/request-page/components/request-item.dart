@@ -4,6 +4,7 @@ import 'package:chat_app_mobile_client/generated/l10n.dart';
 import 'package:chat_app_mobile_client/models/contact.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
+import 'package:chat_app_mobile_client/ui/message/message-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,8 @@ class _RequestItemState extends State<RequestItem> {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: ListTile(
+        onTap: () => Navigator.of(context).pushNamed(MessageScreen.routeName,
+            arguments: widget.contact.userRequested),
         leading: CircleAvatar(
           radius: 30,
           backgroundImage: getImage(widget.contact.userRequested),

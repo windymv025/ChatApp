@@ -1,6 +1,7 @@
 import 'package:chat_app_mobile_client/constants/assets.dart';
 import 'package:chat_app_mobile_client/constants/styles.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
+import 'package:chat_app_mobile_client/ui/message/message-screen.dart';
 import 'package:flutter/material.dart';
 
 class FriendItem extends StatelessWidget {
@@ -9,6 +10,8 @@ class FriendItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => Navigator.of(context)
+          .pushNamed(MessageScreen.routeName, arguments: friend),
       leading: CircleAvatar(
         radius: 30,
         backgroundImage: getImage(friend),
