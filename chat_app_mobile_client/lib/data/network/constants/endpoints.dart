@@ -34,4 +34,5 @@ class Endpoints {
   static const String getInvidualMessage = "/message/invidual";
   static const String addInvidualMessage = "/message/invidual/add";
   static const String addGroupMessage = "/message/group/add";
+  static const String changeProfile = "/info/edit";
 }

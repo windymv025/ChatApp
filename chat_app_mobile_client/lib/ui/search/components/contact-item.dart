@@ -1,41 +1,33 @@
 import 'package:chat_app_mobile_client/constants/assets.dart';
 import 'package:chat_app_mobile_client/constants/styles.dart';
-import 'package:chat_app_mobile_client/generated/l10n.dart';
-import 'package:chat_app_mobile_client/models/contact.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RequestItem extends StatefulWidget {
-  const RequestItem({Key? key, required this.contact}) : super(key: key);
-  final Contact contact;
+class ContactItem extends StatefulWidget {
+  const ContactItem({Key? key, required this.user}) : super(key: key);
+  final User user;
   @override
-  _RequestItemState createState() => _RequestItemState();
+  _ContactItemState createState() => _ContactItemState();
 }
 
-class _RequestItemState extends State<RequestItem> {
+class _ContactItemState extends State<ContactItem> {
   @override
   Widget build(BuildContext context) {
-    ContactProvider contactProvider = Provider.of<ContactProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: ListTile(
         leading: CircleAvatar(
           radius: 30,
-          backgroundImage: getImage(widget.contact.userRequested),
+          backgroundImage: getImage(widget.user),
         ),
         title: Text(
-          widget.contact.userRequested.name,
+          widget.user.name,
           style: titleStyle,
         ),
-        subtitle: Text(widget.contact.userRequested.email),
-        trailing: OutlinedButton(
-          onPressed: () {
-            contactProvider.acceptContact(widget.contact);
-          },
-          child: Text(S.current.accept),
-        ),
+        subtitle: Text(widget.user.email),
+        trailing: widget.user.state.getIconButton(),
       ),
     );
   }

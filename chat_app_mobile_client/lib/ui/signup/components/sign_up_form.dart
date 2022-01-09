@@ -86,6 +86,7 @@ class _SignUpFormState extends State<SignUpForm> {
                             .register(email!, password!, fullName!)
                             .then((value) {
                           if (value) {
+                            Navigator.of(context).pop();
                             Navigator.of(context).pushReplacementNamed(
                               HomeScreen.routeName,
                             );

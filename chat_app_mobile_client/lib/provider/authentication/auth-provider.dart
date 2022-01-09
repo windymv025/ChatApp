@@ -17,13 +17,14 @@ class AuthProvider extends ChangeNotifier {
   late User profile;
   AuthApi authApi = AuthApi();
   String message = "";
+  String newName = "";
 
   Future<bool> login(String email, String password) async {
     var passHash = md5Hash(password);
     var res = await authApi.login(email, passHash) as Map;
     if (res.containsKey("user")) {
       profile = User.fromMap(res["user"]);
-
+      profile.password = password;
       await saveToken(res["access_token"]);
       await saveProfile(password);
       notifyListeners();
@@ -40,10 +41,12 @@ class AuthProvider extends ChangeNotifier {
     var res = await authApi.register(email, passHash, name) as Map;
     if (res.containsKey("user")) {
       profile = User.fromMap(res["user"]);
-      await saveToken(res["access_token"]);
+      profile.password = password;
+      // await saveToken(res["access_token"]);
       await saveProfile(password);
       notifyListeners();
-      return true;
+
+      return login(email, password);
     } else {
       message = res["message"];
       notifyListeners();
@@ -92,10 +95,20 @@ class AuthProvider extends ChangeNotifier {
   loadProfile() async {
     var prefs = await SharedPreferenceHelper.instance;
     var profileTemp = await prefs.profile;
-    if (profileTemp != null) {
+    var passwordTemp = await prefs.password;
+    if (profileTemp != null && passwordTemp != null) {
       profile = profileTemp;
-      notifyListeners();
+      profile.password = passwordTemp;
+    } else {
+      profile = User(
+          id: "",
+          name: "",
+          email: "",
+          createdAt: DateTime.now(),
+          imageUrl: '',
+          password: "");
     }
+    notifyListeners();
   }
 
   resetProfile() async {
@@ -117,9 +130,20 @@ class AuthProvider extends ChangeNotifier {
     return digest.toString();
   }
 
-  void _init() {}
+  void _init() {
+    loadProfile();
+  }
 
-  void updateProfile() {
-    //TODO: update profile
+  Future<bool> updateProfile() async {
+    var passHash = md5Hash(profile.password!);
+    // ignore: avoid_print
+    print(profile.name);
+    var req = await authApi.changeProfile(profile.name, passHash);
+    if (req != null) {
+      saveProfile(profile.password!);
+      notifyListeners();
+      return true;
+    }
+    return false;
   }
 }

@@ -2,6 +2,7 @@ import 'package:chat_app_mobile_client/constants/colors.dart';
 import 'package:chat_app_mobile_client/constants/strings.dart';
 import 'package:chat_app_mobile_client/generated/l10n.dart';
 import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
+import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
 import 'package:chat_app_mobile_client/ui/home/home-screen.dart';
 import 'package:chat_app_mobile_client/ui/widgets/button/custom_suffix_icon.dart';
 import 'package:chat_app_mobile_client/ui/widgets/button/default_button.dart';
@@ -24,6 +25,16 @@ class _SignInFormState extends State<SignInForm> {
   List<String> errors = [];
   bool isLoginPressed = false;
 
+  late AuthProvider profile;
+
+  @override
+  void initState() {
+    super.initState();
+    profile = context.read<AuthProvider>();
+    email = profile.profile.email;
+    password = profile.profile.password;
+  }
+
   void addError(String error) {
     if (!errors.contains(error)) {
       setState(() {
@@ -42,7 +53,7 @@ class _SignInFormState extends State<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthProvider profile = context.read<AuthProvider>();
+    ContactProvider contactProvider = context.read<ContactProvider>();
     return Form(
       key: _formKey,
       child: Column(
@@ -78,6 +89,7 @@ class _SignInFormState extends State<SignInForm> {
                             Navigator.of(context).pushReplacementNamed(
                               HomeScreen.routeName,
                             );
+                            contactProvider.loadContact();
                           } else {
                             addError(S.current.invalid_credentials);
                             isLoginPressed = false;
@@ -95,6 +107,7 @@ class _SignInFormState extends State<SignInForm> {
   TextFormField buildEmailFormField() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
+      initialValue: email,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         checkEmail(value);
@@ -114,6 +127,7 @@ class _SignInFormState extends State<SignInForm> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
       obscureText: true,
+      initialValue: password,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         checkPassword(value);

@@ -4,6 +4,7 @@ import 'package:chat_app_mobile_client/generated/l10n.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
 import 'package:chat_app_mobile_client/ui/profile/profile-screen.dart';
+import 'package:chat_app_mobile_client/ui/search/search-screen.dart';
 import 'package:chat_app_mobile_client/ui/widgets/button/circle_avatar_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
@@ -40,7 +41,9 @@ class _ContactAppBarState extends State<ContactAppBar> {
       ),
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(SearchScreen.routeName);
+            },
             icon: const Icon(
               Icons.search_rounded,
               size: 30,

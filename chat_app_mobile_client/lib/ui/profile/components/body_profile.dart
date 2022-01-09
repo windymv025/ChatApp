@@ -38,7 +38,7 @@ class _BodyProfileState extends State<BodyProfile> {
       Padding(
         child: ProfileForm(
           onSubmit: () {
-            profile.updateProfile();
+            return profile.updateProfile();
           },
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20),

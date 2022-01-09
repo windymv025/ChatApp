@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:chat_app_mobile_client/models/user-state/new-user-state.dart';
+import 'package:chat_app_mobile_client/models/user-state/request-user-sate.dart';
+import 'package:chat_app_mobile_client/models/user-state/user-state.dart';
+
 class User {
   User(
       {required this.id,
@@ -7,14 +11,17 @@ class User {
       required this.name,
       required this.imageUrl,
       required this.createdAt,
+      this.password,
       this.isPriority = false});
 
   String id;
   String email;
   String name;
+  String? password;
   String imageUrl;
   DateTime createdAt;
   bool isPriority;
+  UserState state = RequestUserState();
 
   factory User.fromJson(String str) => User.fromMap(json.decode(str));
 

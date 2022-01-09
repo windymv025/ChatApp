@@ -1,3 +1,4 @@
+import 'package:chat_app_mobile_client/constants/colors.dart';
 import 'package:chat_app_mobile_client/generated/l10n.dart';
 import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
 import 'package:chat_app_mobile_client/ui/widgets/button/custom_suffix_icon.dart';
@@ -15,6 +16,7 @@ class ProfileForm extends StatefulWidget {
 
 class _ProfileFormState extends State<ProfileForm> {
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +29,10 @@ class _ProfileFormState extends State<ProfileForm> {
             TextFormField(
               initialValue: profile.profile.email,
               enabled: false,
-              decoration: InputDecoration(
-                label: Text(S.current.full_name),
-                hintText: S.current.please_enter_your_name,
+              decoration: const InputDecoration(
+                label: Text('Email'),
                 floatingLabelBehavior: FloatingLabelBehavior.always,
-                suffixIcon: const CustomSurffixIcon(icon: Icons.email_outlined),
+                suffixIcon: CustomSurffixIcon(icon: Icons.email_outlined),
               ),
             ),
             const SizedBox(
@@ -53,9 +54,7 @@ class _ProfileFormState extends State<ProfileForm> {
                 if (value.length < 3) {
                   return S.current.err_name_short;
                 }
-                if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
-                  return S.current.err_name_invalid;
-                }
+
                 return null;
               },
               decoration: InputDecoration(
@@ -71,22 +70,34 @@ class _ProfileFormState extends State<ProfileForm> {
             const SizedBox(
               height: 20,
             ),
-            DefaultButton(
-              text: S.current.save_changes,
-              press: () {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  widget.onSubmit();
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(S.current.Profile_updated),
-                  ));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(S.current.err_fill_all),
-                  ));
-                }
-              },
-            ),
+            isLoading
+                ? CircularProgressIndicator(
+                    valueColor: const AlwaysStoppedAnimation(kMainBlueColor),
+                    backgroundColor: Colors.grey[200],
+                  )
+                : DefaultButton(
+                    text: S.current.save_changes,
+                    press: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        setState(() {
+                          isLoading = true;
+                        });
+                        widget.onSubmit().then((_) {
+                          setState(() {
+                            isLoading = false;
+                          });
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(S.current.Profile_updated),
+                        ));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(S.current.err_fill_all),
+                        ));
+                      }
+                    },
+                  ),
 
             //
             const SizedBox(

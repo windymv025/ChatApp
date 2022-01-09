@@ -35,4 +35,20 @@ class AuthApi {
     );
     return response;
   }
+
+  Future<dynamic> changeProfile(String name, String password) async {
+    SharedPreferenceHelper sharedPref = await SharedPreferenceHelper.instance;
+    String? token = await sharedPref.authToken;
+    final response = await _restClient.post(
+      Endpoints.changeProfile,
+      headers: {
+        'x-auth-token': token ?? '',
+      },
+      body: {
+        'name': name,
+        'password': password,
+      },
+    );
+    return response;
+  }
 }
