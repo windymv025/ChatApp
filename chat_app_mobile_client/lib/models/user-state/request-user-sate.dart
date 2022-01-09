@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class RequestUserState extends UserState {
   @override
-  IconData getIconData() {
-    return Icons.person_add_disabled;
+  Widget getIcon() {
+    return const Icon(Icons.person_add_disabled);
   }
 
   @override
-  void onPress() {
-    // TODO: implement onPress
+  UserStateType onPress() {
+    return UserStateType.requestUser;
   }
 }

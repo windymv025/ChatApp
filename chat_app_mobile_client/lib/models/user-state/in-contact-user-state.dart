@@ -4,12 +4,15 @@ import 'user-state.dart';
 
 class InContactUserState extends UserState {
   @override
-  IconData getIconData() {
-    return Icons.person_remove;
+  Widget getIcon() {
+    return const Icon(
+      Icons.person_remove,
+      color: Colors.red,
+    );
   }
 
   @override
-  void onPress() {
-    // TODO: implement onPress
+  UserStateType onPress() {
+    return UserStateType.inContact;
   }
 }

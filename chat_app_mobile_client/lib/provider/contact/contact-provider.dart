@@ -6,6 +6,7 @@ import 'package:chat_app_mobile_client/models/user-state/in-contact-user-state.d
 import 'package:chat_app_mobile_client/models/user-state/new-user-state.dart';
 import 'package:chat_app_mobile_client/models/user-state/request-user-sate.dart';
 import 'package:chat_app_mobile_client/models/user-state/response-add-user-state.dart';
+import 'package:chat_app_mobile_client/models/user-state/user-state.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -25,7 +26,8 @@ class ContactProvider extends ChangeNotifier {
     var res = await _contactApi.getContacts();
     if (res != null) {
       for (var item in res) {
-        _contacts.add(Contact.fromMap(item));
+        var user = Contact.fromMap(item);
+        _contacts.add(user);
       }
       notifyListeners();
     }
@@ -37,6 +39,11 @@ class ContactProvider extends ChangeNotifier {
     for (var item in _contacts) {
       if (item.isAccepted) {
         _acceptContacts.add(item);
+        if (item.userRequested.id == profile.id) {
+          item.userRequestedTo.state = InContactUserState();
+        } else {
+          item.userRequested.state = InContactUserState();
+        }
       }
     }
     return _acceptContacts;
@@ -48,6 +55,7 @@ class ContactProvider extends ChangeNotifier {
     for (var item in _contacts) {
       if (!item.isAccepted && item.userRequested.id != _profile!.id) {
         _respontContacts.add(item);
+        item.userRequested.state = RequestUserState();
       }
     }
     return _respontContacts;
@@ -59,13 +67,6 @@ class ContactProvider extends ChangeNotifier {
     if (_p != null) {
       _profile = _p;
     }
-  }
-
-  void acceptContact(Contact contact) {
-    _contactApi.acceptContact(contact.id);
-    _contacts.firstWhere((element) => element.id == contact.id).isAccepted =
-        true;
-    notifyListeners();
   }
 
   void searchContact(String keyword, User profile) async {
@@ -111,9 +112,78 @@ class ContactProvider extends ChangeNotifier {
           user.state = ResponseAddUserState();
         }
       }
+      user.state.idContact = contacts.first.id;
     } else {
       user.state = NewUserState();
+      user.state.idContact = user.id;
     }
+    notifyListeners();
+  }
+
+  void acceptContact(Contact contact) {
+    _contactApi.acceptContact(contact.id);
+    _contacts.firstWhere((element) => element.id == contact.id).isAccepted =
+        true;
+    notifyListeners();
+  }
+
+  void removeContact(String idUser) {
+    var contact = _contacts.firstWhere((element) =>
+        element.userRequested.id == idUser ||
+        element.userRequestedTo.id == idUser);
+    _contactApi.removeContact(contact.id);
+    _contacts.removeWhere((element) => element.id == contact.id);
+    notifyListeners();
+  }
+
+  void addNewContact(User user) async {
+    var res = await _contactApi.addNewContact(user.id);
+    var contact = Contact.fromMap(res);
+    _contacts.add(contact);
+    notifyListeners();
+  }
+
+  void acceptContactByUserId(String idUser) {
+    var contact = _contacts.firstWhere((element) =>
+        element.userRequested.id == idUser ||
+        element.userRequestedTo.id == idUser);
+    _contactApi.acceptContact(contact.id);
+    notifyListeners();
+  }
+
+  userStateChange(User user) async {
+    var type = user.onPress();
+    switch (type) {
+      case UserStateType.inContact:
+        user.state = NewUserState();
+        removeContact(user.id);
+        break;
+
+      case UserStateType.newUser:
+        user.state = RequestUserState();
+        addNewContact(user);
+        break;
+
+      case UserStateType.requestUser:
+        user.state = NewUserState();
+        removeContact(user.id);
+        break;
+
+      case UserStateType.responseUser:
+        user.state = InContactUserState();
+        acceptContactByUserId(user.id);
+        break;
+
+      default:
+        break;
+    }
+    notifyListeners();
+  }
+
+  void clean() {
+    _contacts.clear();
+    _searchContacts.clear();
+    _profile = null;
     notifyListeners();
   }
 }

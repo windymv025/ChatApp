@@ -17,7 +17,6 @@ class AuthProvider extends ChangeNotifier {
   late User profile;
   AuthApi authApi = AuthApi();
   String message = "";
-  String newName = "";
 
   Future<bool> login(String email, String password) async {
     var passHash = md5Hash(password);
@@ -145,5 +144,11 @@ class AuthProvider extends ChangeNotifier {
       return true;
     }
     return false;
+  }
+
+  void clean() {
+    imageFile = null;
+    message = "";
+    notifyListeners();
   }
 }

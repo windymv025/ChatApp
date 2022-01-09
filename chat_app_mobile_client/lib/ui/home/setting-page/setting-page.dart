@@ -1,6 +1,8 @@
 import 'package:chat_app_mobile_client/constants/colors.dart';
 import 'package:chat_app_mobile_client/generated/l10n.dart';
 import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
+import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
+import 'package:chat_app_mobile_client/provider/group/group-provider.dart';
 import 'package:chat_app_mobile_client/provider/home/home-provider.dart';
 import 'package:chat_app_mobile_client/ui/home/setting-page/components/settings_button.dart';
 import 'package:chat_app_mobile_client/ui/profile/profile-screen.dart';
@@ -22,6 +24,8 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     AuthProvider authProvider = context.read();
     HomeProvider homeProvider = context.read();
+    ContactProvider contactProvider = context.read();
+    GroupProvider groupProvider = context.read();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
@@ -62,6 +66,11 @@ class _SettingPageState extends State<SettingPage> {
             onPress: () {
               homeProvider.pageIndex = 0;
               authProvider.logout();
+
+              contactProvider.clean();
+              groupProvider.clean();
+              authProvider.clean();
+
               Navigator.pushReplacementNamed(context, SignInScreen.routeName);
             },
             icon: const Icon(

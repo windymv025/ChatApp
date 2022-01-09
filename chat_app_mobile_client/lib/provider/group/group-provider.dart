@@ -27,4 +27,9 @@ class GroupProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
+
+  void clean() {
+    _groups.clear();
+    notifyListeners();
+  }
 }

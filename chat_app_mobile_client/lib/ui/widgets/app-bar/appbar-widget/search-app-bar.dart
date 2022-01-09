@@ -43,6 +43,9 @@ class _SearchAppBarState extends State<SearchAppBar> {
               });
               contactProvider.searchContact(value, authProvider.profile);
             },
+            style: const TextStyle(
+              color: Colors.black,
+            ),
             decoration: InputDecoration(
               hintText: S.of(context).search,
               border: InputBorder.none,

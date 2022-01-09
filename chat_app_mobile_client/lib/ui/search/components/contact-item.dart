@@ -1,5 +1,7 @@
 import 'package:chat_app_mobile_client/constants/assets.dart';
 import 'package:chat_app_mobile_client/constants/styles.dart';
+import 'package:chat_app_mobile_client/generated/l10n.dart';
+import 'package:chat_app_mobile_client/models/user-state/user-state.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
 import 'package:chat_app_mobile_client/ui/message/message-screen.dart';
@@ -16,6 +18,7 @@ class ContactItem extends StatefulWidget {
 class _ContactItemState extends State<ContactItem> {
   @override
   Widget build(BuildContext context) {
+    ContactProvider contactProvider = Provider.of<ContactProvider>(context);
     return InkWell(
       onTap: () => Navigator.of(context)
           .pushNamed(MessageScreen.routeName, arguments: widget.user),
@@ -31,7 +34,14 @@ class _ContactItemState extends State<ContactItem> {
             style: titleStyle,
           ),
           subtitle: Text(widget.user.email),
-          trailing: widget.user.state.getIconButton(),
+          trailing: widget.user.onPress() == UserStateType.responseUser
+              ? OutlinedButton(
+                  onPressed: () => contactProvider.userStateChange(widget.user),
+                  child: Text(S.current.accept))
+              : IconButton(
+                  icon: widget.user.getIcon(),
+                  onPressed: () => contactProvider.userStateChange(widget.user),
+                ),
         ),
       ),
     );
