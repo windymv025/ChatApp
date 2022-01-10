@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:chat_app_mobile_client/data/network/apis/authentication/auth-api.dart';
 import 'package:chat_app_mobile_client/data/sharedpref/shared_preference_helper.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
+import 'package:chat_app_mobile_client/service/socket-service.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -24,6 +25,7 @@ class AuthProvider extends ChangeNotifier {
     if (res.containsKey("user")) {
       profile = User.fromMap(res["user"]);
       profile.password = password;
+      SocketService.instance.connectAndListen(profile.id);
       await saveToken(res["access_token"]);
       await saveProfile(password);
       notifyListeners();
