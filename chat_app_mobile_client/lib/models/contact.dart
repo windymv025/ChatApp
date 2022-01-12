@@ -23,7 +23,7 @@ class Contact {
         userRequestedTo: User.fromMap(json["user_requested_to"]),
         isAccepted: json["is_accepted"],
         removedAt: json["removed_at"] != null
-            ? DateTime.parse(json["removed_at"])
+            ? DateTime.parse(json["removed_at"]).toLocal()
             : null,
         isPriority: json["is_priority"],
       );

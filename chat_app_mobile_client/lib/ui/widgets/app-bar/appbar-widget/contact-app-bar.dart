@@ -3,6 +3,7 @@ import 'package:chat_app_mobile_client/constants/styles.dart';
 import 'package:chat_app_mobile_client/generated/l10n.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
+import 'package:chat_app_mobile_client/provider/home/home-provider.dart';
 import 'package:chat_app_mobile_client/ui/profile/profile-screen.dart';
 import 'package:chat_app_mobile_client/ui/search/search-screen.dart';
 import 'package:chat_app_mobile_client/ui/widgets/button/circle_avatar_button.dart';
@@ -26,43 +27,50 @@ class _ContactAppBarState extends State<ContactAppBar> {
   @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider = context.watch<AuthProvider>();
-    return AppBar(
-      leading: Center(
-        child: CircleAvatarButton(
-          image: getImage(authProvider.profile),
-          onPressed: () =>
-              Navigator.pushNamed(context, ProfileScreen.routeName),
-        ),
-      ),
-      title: Center(
-        child: Text(
-          widget.title,
-        ),
-      ),
-      actions: [
-        IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(SearchScreen.routeName);
-            },
-            icon: const Icon(
-              Icons.search_rounded,
-              size: 30,
-            ))
-      ],
-      bottom: TabBar(
-        labelColor: Colors.white,
-        labelStyle: titleStyleWhite,
-        indicatorColor: Colors.white,
-        automaticIndicatorColorAdjustment: true,
-        onTap: (value) {},
-        tabs: [
-          Tab(
-            text: S.current.tab_friend,
+    final HomeProvider homeProvider = context.watch<HomeProvider>();
+    return DefaultTabController(
+      length: 2,
+      initialIndex: homeProvider.tabContactIndex,
+      child: AppBar(
+        leading: Center(
+          child: CircleAvatarButton(
+            image: getImage(authProvider.profile),
+            onPressed: () =>
+                Navigator.pushNamed(context, ProfileScreen.routeName),
           ),
-          Tab(
-            text: S.current.tab_group,
+        ),
+        title: Center(
+          child: Text(
+            widget.title,
           ),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(SearchScreen.routeName);
+              },
+              icon: const Icon(
+                Icons.search_rounded,
+                size: 30,
+              ))
         ],
+        bottom: TabBar(
+          labelColor: Colors.white,
+          labelStyle: titleStyleWhite,
+          indicatorColor: Colors.white,
+          automaticIndicatorColorAdjustment: true,
+          onTap: (value) {
+            homeProvider.tabContactIndex = value;
+          },
+          tabs: [
+            Tab(
+              text: S.current.tab_friend,
+            ),
+            Tab(
+              text: S.current.tab_group,
+            ),
+          ],
+        ),
       ),
     );
   }

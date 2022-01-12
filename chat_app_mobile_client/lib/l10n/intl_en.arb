@@ -164,5 +164,11 @@
     "enter_group_name":"Enter group name",
     "name_group":"Group name",
     "account":"Account",
-    "change_password":"Change password"
+    "change_password":"Change password",
+    "image": "Image",
+    "block":"Block",
+    "add_group_member":"Add group member",
+    "remove_group_member":"Remove group member",
+    "leave_group":"Leave group",
+    "delete_message":"Delete message"
 }

@@ -1,3 +1,4 @@
+import 'package:chat_app_mobile_client/data/sharedpref/shared_preference_helper.dart';
 import 'package:chat_app_mobile_client/service/event.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
@@ -10,35 +11,32 @@ class SocketService {
   String idProfile = "";
 
   SocketService._() {
+    SharedPreferenceHelper.instance
+        .then((value) => value.profile.then((value) => idProfile = value!.id));
+
     if (socket != null) {
       socket?.disconnect();
     }
 
     socket = io(baseUlr, OptionBuilder().setTransports(['websocket']).build());
-  }
-
-  void connectAndListen(String id) {
-    idProfile = id;
     socket?.connect();
     socket?.onConnect((_) {
-      joinAppEmit(id);
+      // ignore: avoid_print
+      print("connected");
+      joinAppEmit(idProfile);
     });
   }
 
-  void joinAppEmit(String id) {
-    socket?.emit(Event.joinApp, id);
+  joinAppEmit(String id) {
+    return socket?.emit(Event.joinApp, id);
   }
 
-  void onListOnlineUserListener(callback) {
-    socket?.on(Event.listUserOnline, callback);
+  disconnect() {
+    return socket?.disconnect();
   }
 
-  void disconnect() {
-    socket?.disconnect();
-  }
-
-  void sendMessageEmit(String content, {String? groupId, String? userId}) {
-    socket?.emit(Event.sendMessage, {
+  sendMessageEmit(String content, {String? groupId, String? userId}) {
+    return socket?.emit(Event.sendMessage, {
       "id_sender": idProfile,
       "content": content,
       "id_receiver": userId,
@@ -46,65 +44,69 @@ class SocketService {
     });
   }
 
-  void onReceiveMessage(callback) {
-    socket?.on(Event.recieveMessage, callback);
-  }
-
-  void addNewMemberEmit(String userId, String groupId) {
-    socket?.emit(Event.addNewMember, {
+  addNewMemberEmit(String userId, String groupId) {
+    return socket?.emit(Event.addNewMember, {
       "id_new_member": userId,
       "id_user_added": idProfile,
       "id_group": groupId,
     });
   }
 
-  void onIsAddedToGroup(callback) {
-    socket?.on(Event.isAddedToGroup, callback);
-  }
-
-  void joinGroupEmit(String groupId) {
-    socket?.emit(Event.joinGroup, {
+  joinGroupEmit(String groupId) {
+    return socket?.emit(Event.joinGroup, {
       "id_group": groupId,
     });
   }
 
-  void leaveGroupEmit(String groupId) {
-    socket?.emit(Event.leaveGroup, {
+  leaveGroupEmit(String groupId) {
+    return socket?.emit(Event.leaveGroup, {
       "id_user_leave": idProfile,
       "id_group": groupId,
     });
   }
 
-  void addContactEmit(String userId) {
-    socket?.emit(Event.addContact, {
+  addContactEmit(String userId) {
+    return socket?.emit(Event.addContact, {
       "id_user": idProfile,
       "id_user_contact": userId,
     });
   }
 
-  void onIsAddedContact(callback) {
-    socket?.on(Event.isAddedContact, callback);
-  }
-
-  void removeContactEmit(String idContact) {
-    socket?.emit(Event.removeContact, {
+  removeContactEmit(String idContact) {
+    return socket?.emit(Event.removeContact, {
       "id_user": idProfile,
       "id_contact": idContact,
     });
   }
 
-  void onIsRemovedContact(callback) {
-    socket?.on(Event.isRemoveContact, callback);
-  }
-
-  void acceptContactEmit(String idContact) {
-    socket?.emit(Event.acceptContact, {
+  acceptContactEmit(String idContact) {
+    return socket?.emit(Event.acceptContact, {
       "id_user": idProfile,
       "id_contact": idContact,
     });
   }
 
-  void onIsAcceptedContact(callback) {
-    socket?.on(Event.isAcceptContact, callback);
+  onListOnlineUserListener(callback) {
+    return socket?.on(Event.listUserOnline, callback);
+  }
+
+  onReceiveMessage(callback) {
+    return socket?.on(Event.recieveMessage, callback);
+  }
+
+  onIsAddedToGroup(callback) {
+    return socket?.on(Event.isAddedToGroup, callback);
+  }
+
+  onIsAddedContact(callback) {
+    return socket?.on(Event.isAddedContact, callback);
+  }
+
+  onIsRemovedContact(callback) {
+    return socket?.on(Event.isRemoveContact, callback);
+  }
+
+  onIsAcceptedContact(callback) {
+    return socket?.on(Event.isAcceptContact, callback);
   }
 }

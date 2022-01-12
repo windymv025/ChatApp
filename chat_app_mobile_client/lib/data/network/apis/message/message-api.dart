@@ -18,7 +18,7 @@ class MessageApi {
   Future<dynamic> getGroupMessages(String groupId) async {
     String? token = await _restClient.getToken();
     final response = await _restClient.get(
-      Endpoints.getMainMessage,
+      Endpoints.getGroupMessage,
       params: {
         'id_group': groupId,
       },
@@ -32,7 +32,7 @@ class MessageApi {
   Future<dynamic> getInvidualMessages(String userId) async {
     String? token = await _restClient.getToken();
     final response = await _restClient.get(
-      Endpoints.getMainMessage,
+      Endpoints.getInvidualMessage,
       params: {
         'id_user_contact': userId,
       },

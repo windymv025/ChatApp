@@ -17,10 +17,15 @@ class _RequestPageState extends State<RequestPage> {
   Widget build(BuildContext context) {
     ContactProvider contactProvider = Provider.of<ContactProvider>(context);
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    return Container(
-      margin: const EdgeInsets.only(top: 5),
-      child: RequestContactAdapter(
-        contacts: contactProvider.getRequestContacts(authProvider.profile),
+    return RefreshIndicator(
+      onRefresh: () async {
+        setState(() {});
+      },
+      child: Container(
+        margin: const EdgeInsets.only(top: 5),
+        child: RequestContactAdapter(
+          contacts: contactProvider.getRequestContacts(authProvider.profile),
+        ),
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:chat_app_mobile_client/models/contact.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
 
 import 'group.dart';
@@ -34,7 +33,7 @@ class Conversation {
         group: json["group"] == null ? null : Group.fromMap(json["group"]),
         content: json["content"],
         type: json["type"],
-        sentAt: DateTime.parse(json["sent_at"]),
+        sentAt: DateTime.parse(json["sent_at"]).toLocal(),
         isRemoved: json["is_removed"],
         isNotification: json["is_notification"],
       );

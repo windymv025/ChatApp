@@ -1,6 +1,8 @@
 import 'package:chat_app_mobile_client/constants/colors.dart';
 import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
+import 'package:chat_app_mobile_client/provider/group/group-provider.dart';
 import 'package:chat_app_mobile_client/provider/home/home-provider.dart';
+import 'package:chat_app_mobile_client/provider/message/message-provider.dart';
 import 'package:chat_app_mobile_client/ui/home/contact-page/contact-page.dart';
 import 'package:chat_app_mobile_client/ui/home/request-page/request-page.dart';
 import 'package:chat_app_mobile_client/ui/home/setting-page/setting-page.dart';
@@ -28,55 +30,48 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final homeProvider = context.watch<HomeProvider>();
-    final ContactProvider contactProvider = context.watch<ContactProvider>();
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: _appBarFactory
-            .getAppBar(HomeProvider.titles[homeProvider.pageIndex]),
-        body: _children[homeProvider.pageIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: homeProvider.pageIndex,
-          selectedItemColor: Theme.of(context).colorScheme.primary,
-          unselectedItemColor: Theme.of(context).colorScheme.secondary,
-          showUnselectedLabels: true,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.message_rounded),
-              label: HomeProvider.titles[0],
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.contact_phone_rounded),
-              label: HomeProvider.titles[1],
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.person_add_alt_1_rounded),
-              label: HomeProvider.titles[2],
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.settings_rounded),
-              label: HomeProvider.titles[3],
-            ),
-          ],
-          onTap: (index) {
-            if (index == 1) {
-              contactProvider.loadContact();
-            }
-            loadPage(index);
-            homeProvider.pageIndex = index;
-          },
-        ),
-        floatingActionButton: homeProvider.pageIndex < 2
-            ? FloatingActionButton(
-                backgroundColor: kMainBlueColor,
-                onPressed: () => showDialog(
-                    context: context,
-                    builder: (context) => const AddGroupDialog()),
-                child: const Icon(Icons.group_add_rounded,
-                    size: 30, color: Colors.white),
-              )
-            : null,
+    return Scaffold(
+      appBar:
+          _appBarFactory.getAppBar(HomeProvider.titles[homeProvider.pageIndex]),
+      body: _children[homeProvider.pageIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: homeProvider.pageIndex,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        unselectedItemColor: Theme.of(context).colorScheme.secondary,
+        showUnselectedLabels: true,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.message_rounded),
+            label: HomeProvider.titles[0],
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.contact_phone_rounded),
+            label: HomeProvider.titles[1],
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person_add_alt_1_rounded),
+            label: HomeProvider.titles[2],
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.settings_rounded),
+            label: HomeProvider.titles[3],
+          ),
+        ],
+        onTap: (index) {
+          loadPage(index);
+          homeProvider.pageIndex = index;
+        },
       ),
+      floatingActionButton: homeProvider.pageIndex < 2
+          ? FloatingActionButton(
+              backgroundColor: kMainBlueColor,
+              onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => const AddGroupDialog()),
+              child: const Icon(Icons.group_add_rounded,
+                  size: 30, color: Colors.white),
+            )
+          : null,
     );
   }
 

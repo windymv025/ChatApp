@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:chat_app_mobile_client/models/user.dart';
 
 class Group {
-  Group({
-    required this.id,
-    required this.name,
-    required this.createdAt,
-    required this.isDeleted,
-    required this.joinedAt,
-    this.leftAt,
-    required this.userAdded,
-    required this.isAdmin,
-  });
+  Group(
+      {required this.id,
+      required this.name,
+      required this.createdAt,
+      required this.isDeleted,
+      required this.joinedAt,
+      this.leftAt,
+      required this.userAdded,
+      required this.isAdmin,
+      this.isPriority = true});
 
   String id;
   String name;
@@ -22,21 +22,22 @@ class Group {
   DateTime? leftAt;
   User userAdded;
   bool isAdmin;
+  bool isPriority;
 
   factory Group.fromJson(String str) => Group.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory Group.fromMap(Map<String, dynamic> json) => Group(
-        id: json["_id"],
-        name: json["name"],
-        createdAt: DateTime.parse(json["created_at"]),
-        isDeleted: json["is_deleted"],
-        joinedAt: DateTime.parse(json["joined_at"]),
-        leftAt: json["left_at"],
-        userAdded: User.fromMap(json["user_added"]),
-        isAdmin: json["is_admin"],
-      );
+      id: json["_id"],
+      name: json["name"],
+      createdAt: DateTime.parse(json["created_at"]).toLocal(),
+      isDeleted: json["is_deleted"],
+      joinedAt: DateTime.parse(json["joined_at"]).toLocal(),
+      leftAt: json["left_at"],
+      userAdded: User.fromMap(json["user_added"]),
+      isAdmin: json["is_admin"],
+      isPriority: json["is_priority"]);
 
   Map<String, dynamic> toMap() => {
         "_id": id,
@@ -47,5 +48,6 @@ class Group {
         "left_at": leftAt,
         "user_added": userAdded.toMap(),
         "is_admin": isAdmin,
+        "is_priority": isPriority
       };
 }

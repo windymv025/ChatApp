@@ -5,7 +5,6 @@ import 'package:chat_app_mobile_client/data/sharedpref/shared_preference_helper.
 import 'package:http/http.dart' as http;
 
 import 'constants/endpoints.dart';
-import 'exceptions/network_exceptions.dart';
 
 class RestClient {
   static RestClient? _instance;

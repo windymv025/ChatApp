@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:chat_app_mobile_client/models/contact.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
 
 class Block {
@@ -28,9 +27,9 @@ class Block {
         id: json["_id"],
         user: User.fromMap(json["user"]),
         userBlocked: User.fromMap(json["user_blocked"]),
-        blockedAt: DateTime.parse(json["blocked_at"]),
+        blockedAt: DateTime.parse(json["blocked_at"]).toLocal(),
         isRemoved: json["is_removed"],
-        updatedAt: DateTime.parse(json["updated_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]).toLocal(),
       );
 
   Map<String, dynamic> toMap() => {

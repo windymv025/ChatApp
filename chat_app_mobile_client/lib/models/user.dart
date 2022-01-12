@@ -9,14 +9,14 @@ import 'package:chat_app_mobile_client/models/user-state/user-state.dart';
 import 'package:flutter/material.dart';
 
 class User {
-  User(
-      {required this.id,
-      required this.email,
-      required this.name,
-      required this.imageUrl,
-      required this.createdAt,
-      this.password,
-      this.isPriority = false});
+  User({
+    required this.id,
+    required this.email,
+    required this.name,
+    required this.imageUrl,
+    required this.createdAt,
+    this.password,
+  });
 
   String id;
   String email;
@@ -24,7 +24,6 @@ class User {
   String? password;
   String imageUrl;
   DateTime createdAt;
-  bool isPriority;
   UserState state = RequestUserState();
 
   factory User.fromJson(String str) => User.fromMap(json.decode(str));
@@ -36,8 +35,7 @@ class User {
         email: json["email"],
         name: json["name"],
         imageUrl: json["image_url"],
-        createdAt: DateTime.parse(json["created_at"]),
-        isPriority: json["is_priority"] ?? false,
+        createdAt: DateTime.parse(json["created_at"]).toLocal(),
       );
 
   Map<String, dynamic> toMap() => {
@@ -46,7 +44,6 @@ class User {
         "name": name,
         "image_url": imageUrl,
         "created_at": createdAt.toIso8601String(),
-        "is_priority": isPriority,
       };
 
   UserStateType onPress() {

@@ -8,6 +8,7 @@ import 'package:chat_app_mobile_client/models/user-state/request-user-sate.dart'
 import 'package:chat_app_mobile_client/models/user-state/response-add-user-state.dart';
 import 'package:chat_app_mobile_client/models/user-state/user-state.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
+import 'package:chat_app_mobile_client/service/socket-service.dart';
 import 'package:flutter/cupertino.dart';
 
 class ContactProvider extends ChangeNotifier {
@@ -18,20 +19,10 @@ class ContactProvider extends ChangeNotifier {
   final UserApi _userApi = UserApi();
   User? _profile;
 
+  late SocketService _socketService;
+
   List<Contact> get contacts => _contacts;
   List<User> get searchContacts => _searchContacts;
-
-  void loadContact() async {
-    _contacts.clear();
-    var res = await _contactApi.getContacts();
-    if (res != null) {
-      for (var item in res) {
-        var user = Contact.fromMap(item);
-        _contacts.add(user);
-      }
-      notifyListeners();
-    }
-  }
 
   List<Contact> getAcceptContacts(User profile) {
     _profile ??= profile;
@@ -61,11 +52,85 @@ class ContactProvider extends ChangeNotifier {
     return _respontContacts;
   }
 
-  void getProfile() async {
+  // void getAcceptContacts() {
+  //   _acceptContacts.clear();
+  //   for (var item in _contacts) {
+  //     if (item.isAccepted) {
+  //       _acceptContacts.add(item);
+  //       if (item.userRequested.id == _profile!.id) {
+  //         item.userRequestedTo.state = InContactUserState();
+  //       } else {
+  //         item.userRequested.state = InContactUserState();
+  //       }
+  //     }
+  //   }
+  //   notifyListeners();
+  // }
+
+  // void getRequestContacts() {
+  //   _requestContacts.clear();
+  //   for (var item in _contacts) {
+  //     if (!item.isAccepted && item.userRequested.id != _profile?.id) {
+  //       _requestContacts.add(item);
+  //       item.userRequested.state = RequestUserState();
+  //     }
+  //   }
+  //   notifyListeners();
+  // }
+
+  init() async {
+    await loadContact();
+    await getProfile();
+    _socketService = SocketService.instance;
+    _socketService.onIsAcceptedContact(handleIsAcceptedContact);
+    _socketService.onIsAddedContact(handleIsAddedContact);
+    _socketService.onIsRemovedContact(handleIsRemovedContact);
+  }
+
+  loadContact() async {
+    _contacts.clear();
+    var res = await _contactApi.getContacts();
+    if (res != null && res is List) {
+      for (var item in res) {
+        var user = Contact.fromMap(item);
+        _contacts.add(user);
+      }
+    }
+    notifyListeners();
+  }
+
+  getProfile() async {
     var prefs = await SharedPreferenceHelper.instance;
     var _p = await prefs.profile;
     if (_p != null) {
       _profile = _p;
+    }
+  }
+
+  handleIsAcceptedContact(data) {
+    var contact = Contact.fromMap(data);
+    if (_contacts.where((element) => element.id == contact.id).isNotEmpty) {
+      var temp = _contacts.firstWhere((element) => element.id == contact.id);
+      temp.isAccepted = contact.isAccepted;
+      temp.userRequestedTo.state = InContactUserState();
+      notifyListeners();
+    }
+  }
+
+  handleIsAddedContact(data) {
+    var contact = Contact.fromMap(data);
+    if (_contacts.where((element) => element.id == contact.id).isEmpty) {
+      contact.userRequested.state = ResponseAddUserState();
+      _contacts.add(contact);
+      notifyListeners();
+    }
+  }
+
+  handleIsRemovedContact(data) {
+    var contact = Contact.fromMap(data);
+    if (_contacts.where((element) => element.id == contact.id).isNotEmpty) {
+      _contacts.removeWhere((element) => element.id == contact.id);
+      notifyListeners();
     }
   }
 
@@ -90,13 +155,6 @@ class ContactProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void clearSearch() {
-    _searchContacts.clear();
-    notifyListeners();
-  }
-
-  void addContact(User user) {}
-
   void addStateUser(String id) {
     var contact = _contacts.where((element) =>
         element.userRequested.id == id || element.userRequestedTo.id == id);
@@ -120,34 +178,11 @@ class ContactProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void acceptContact(Contact contact) {
-    _contactApi.acceptContact(contact.id);
+  acceptContact(Contact contact) async {
+    // await _contactApi.acceptContact(contact.id);
+    await _socketService.acceptContactEmit(contact.id);
     _contacts.firstWhere((element) => element.id == contact.id).isAccepted =
         true;
-    notifyListeners();
-  }
-
-  void removeContact(String idUser) {
-    var contact = _contacts.firstWhere((element) =>
-        element.userRequested.id == idUser ||
-        element.userRequestedTo.id == idUser);
-    _contactApi.removeContact(contact.id);
-    _contacts.removeWhere((element) => element.id == contact.id);
-    notifyListeners();
-  }
-
-  void addNewContact(User user) async {
-    var res = await _contactApi.addNewContact(user.id);
-    var contact = Contact.fromMap(res);
-    _contacts.add(contact);
-    notifyListeners();
-  }
-
-  void acceptContactByUserId(String idUser) {
-    var contact = _contacts.firstWhere((element) =>
-        element.userRequested.id == idUser ||
-        element.userRequestedTo.id == idUser);
-    _contactApi.acceptContact(contact.id);
     notifyListeners();
   }
 
@@ -156,27 +191,82 @@ class ContactProvider extends ChangeNotifier {
     switch (type) {
       case UserStateType.inContact:
         user.state = NewUserState();
-        removeContact(user.id);
+        await removeContact(user.id);
         break;
 
       case UserStateType.newUser:
         user.state = RequestUserState();
-        addNewContact(user);
+        await addNewContact(user);
         break;
 
       case UserStateType.requestUser:
         user.state = NewUserState();
-        removeContact(user.id);
+        await removeContact(user.id);
         break;
 
       case UserStateType.responseUser:
         user.state = InContactUserState();
-        acceptContactByUserId(user.id);
+        await acceptContactByUserId(user.id);
         break;
 
       default:
         break;
     }
+    notifyListeners();
+  }
+
+  removeContact(String idUser) async {
+    var contact = _contacts.firstWhere((element) =>
+        element.userRequested.id == idUser ||
+        element.userRequestedTo.id == idUser);
+    // await _contactApi.removeContact(contact.id);
+    await _socketService.removeContactEmit(contact.id);
+    _contacts.removeWhere((element) => element.id == contact.id);
+    notifyListeners();
+  }
+
+  addNewContact(User user) async {
+    // var res = await _contactApi.addNewContact(user.id);
+    // if (res['_id'] == null) {
+    //   user.state = NewUserState();
+    // } else {
+    //   var contact = Contact.fromMap(res);
+    //   contact.userRequested.state = RequestUserState();
+    //   _contacts.add(contact);
+    // }
+    await _socketService.addContactEmit(user.id);
+    await reloadContacts();
+    notifyListeners();
+  }
+
+  acceptContactByUserId(String idUser) async {
+    var contact = _contacts.where((element) =>
+        element.userRequested.id == idUser ||
+        element.userRequestedTo.id == idUser);
+    // await _contactApi.acceptContact(contact.id);
+    if (contact.isNotEmpty) {
+      await _socketService.acceptContactEmit(contact.first.id);
+      _contacts
+          .firstWhere((element) => element.id == contact.first.id)
+          .isAccepted = true;
+      notifyListeners();
+    }
+  }
+
+  reloadContacts() async {
+    _contacts.clear();
+    var res = await _contactApi.getContacts();
+    if (res != null && res is List) {
+      for (var item in res) {
+        var user = Contact.fromMap(item);
+        _contacts.add(user);
+      }
+    }
+    notifyListeners();
+  }
+
+  void clearSearch() {
+    _searchContacts.clear();
     notifyListeners();
   }
 

@@ -25,7 +25,6 @@ class AuthProvider extends ChangeNotifier {
     if (res.containsKey("user")) {
       profile = User.fromMap(res["user"]);
       profile.password = password;
-      SocketService.instance.connectAndListen(profile.id);
       await saveToken(res["access_token"]);
       await saveProfile(password);
       notifyListeners();
@@ -69,18 +68,18 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> loginAgain() async {
-    var prefs = await SharedPreferenceHelper.instance;
-    var p = await prefs.profile;
-    if (p != null) {
-      String email = p.email;
-      String password = await prefs.password ?? "";
+  // Future<bool> loginAgain() async {
+  //   var prefs = await SharedPreferenceHelper.instance;
+  //   var p = await prefs.profile;
+  //   if (p != null) {
+  //     String email = p.email;
+  //     String password = await prefs.password ?? "";
 
-      return await login(email, password);
-    }
+  //     return await login(email, password);
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 
   saveProfile(String password) async {
     var prefs = await SharedPreferenceHelper.instance;

@@ -1,6 +1,5 @@
 import 'package:chat_app_mobile_client/data/network/constants/endpoints.dart';
 import 'package:chat_app_mobile_client/data/sharedpref/shared_preference_helper.dart';
-import 'package:chat_app_mobile_client/models/contact.dart';
 
 import '../../rest_client.dart';
 

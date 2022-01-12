@@ -2,6 +2,9 @@ import 'package:chat_app_mobile_client/constants/colors.dart';
 import 'package:chat_app_mobile_client/constants/strings.dart';
 import 'package:chat_app_mobile_client/generated/l10n.dart';
 import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
+import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
+import 'package:chat_app_mobile_client/provider/group/group-provider.dart';
+import 'package:chat_app_mobile_client/provider/message/message-provider.dart';
 import 'package:chat_app_mobile_client/ui/home/home-screen.dart';
 import 'package:chat_app_mobile_client/ui/widgets/button/custom_suffix_icon.dart';
 import 'package:chat_app_mobile_client/ui/widgets/button/default_button.dart';
@@ -46,6 +49,9 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = context.read<AuthProvider>();
+    ContactProvider contactProvider = context.read<ContactProvider>();
+    GroupProvider groupProvider = context.read<GroupProvider>();
+    MessageProvider messageProvider = context.read<MessageProvider>();
     return Form(
       key: _formKey,
       child: Column(
@@ -86,10 +92,14 @@ class _SignUpFormState extends State<SignUpForm> {
                             .register(email!, password!, fullName!)
                             .then((value) {
                           if (value) {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pushReplacementNamed(
-                              HomeScreen.routeName,
-                            );
+                            contactProvider.init().then((value) {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pushReplacementNamed(
+                                HomeScreen.routeName,
+                              );
+                            });
+                            messageProvider.init();
+                            groupProvider.init();
                           } else {
                             isLoading = false;
                             addError(authProvider.message);

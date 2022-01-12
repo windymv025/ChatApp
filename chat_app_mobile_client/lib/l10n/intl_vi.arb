@@ -165,5 +165,11 @@
     "enter_group_name":"Nhập tên nhóm",
     "name_group":"Tên nhóm",
     "account":"Tài khoản",
-    "change_password":"Đổi mật khẩu"
+    "change_password":"Đổi mật khẩu",
+    "image": "Hình ảnh",
+    "block":"Chặn",
+    "add_group_member":"Thêm thành viên",
+    "remove_group_member":"Xóa thành viên",
+    "leave_group":"Rời nhóm",
+    "delete_message":"Xóa tin nhắn"
 }

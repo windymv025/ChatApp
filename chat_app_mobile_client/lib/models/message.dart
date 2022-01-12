@@ -33,11 +33,12 @@ class Message {
   factory Message.fromMap(Map<String, dynamic> json) => Message(
         id: json["_id"],
         sender: User.fromMap(json["sender"]),
-        receiver: json["receiver"],
-        group: Group.fromMap(json["group"]),
+        receiver:
+            json["receiver"] != null ? User.fromMap(json["receiver"]) : null,
+        group: json["group"] != null ? Group.fromMap(json["group"]) : null,
         content: json["content"],
         type: json["type"],
-        sentAt: DateTime.parse(json["sent_at"]),
+        sentAt: DateTime.parse(json["sent_at"]).toLocal(),
         isRemoved: json["is_removed"],
         isNotification: json["is_notification"],
       );

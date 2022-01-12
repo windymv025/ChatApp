@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chọn quốc gia của bạn"),
         "accept": MessageLookupByLibrary.simpleMessage("Chấp nhận"),
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
+        "add_group_member":
+            MessageLookupByLibrary.simpleMessage("Thêm thành viên"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "approval": MessageLookupByLibrary.simpleMessage("Sự cấp thuận"),
@@ -51,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Trở thành giáo viên"),
         "beginner": MessageLookupByLibrary.simpleMessage("Beginner"),
         "birthday": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
+        "block": MessageLookupByLibrary.simpleMessage("Chặn"),
         "booking_now":
             MessageLookupByLibrary.simpleMessage("Đặt lịch học ngay"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
@@ -75,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_group": MessageLookupByLibrary.simpleMessage("Tạo nhóm mới"),
         "dark": MessageLookupByLibrary.simpleMessage("Tối"),
         "delete": MessageLookupByLibrary.simpleMessage("Xóa"),
+        "delete_message": MessageLookupByLibrary.simpleMessage("Xóa tin nhắn"),
         "dont_have_account":
             MessageLookupByLibrary.simpleMessage("Chưa có tài khoản?"),
         "education": MessageLookupByLibrary.simpleMessage("Học vấn"),
@@ -131,6 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "i_best_teaching_who": MessageLookupByLibrary.simpleMessage(
             "Tôi giỏi nhất là dạy những người này"),
+        "image": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
         "interests": MessageLookupByLibrary.simpleMessage("Sở thích"),
         "introduce_yourself":
             MessageLookupByLibrary.simpleMessage("Giới thiệu bản thân"),
@@ -142,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languages": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "languages_speak":
             MessageLookupByLibrary.simpleMessage("Ngôn ngữ bạn nói"),
+        "leave_group": MessageLookupByLibrary.simpleMessage("Rời nhóm"),
         "lessons": MessageLookupByLibrary.simpleMessage("Bài học"),
         "let_start": MessageLookupByLibrary.simpleMessage("Bắt đầu!"),
         "light": MessageLookupByLibrary.simpleMessage("Sáng"),
@@ -198,6 +204,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xếp hạn và nhận xét"),
         "re_enter_your_password":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu"),
+        "remove_group_member":
+            MessageLookupByLibrary.simpleMessage("Xóa thành viên"),
         "request": MessageLookupByLibrary.simpleMessage("Yêu cầu kết bạn"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Lấy lại mật khẩu"),

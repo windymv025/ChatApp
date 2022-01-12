@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:chat_app_mobile_client/models/user.dart';
+import 'package:intl/intl.dart';
 
 import 'group.dart';
 
 class MainMessage {
   MainMessage({
     required this.id,
-    required this.sender,
+    this.sender,
     this.receiver,
     this.group,
     required this.content,
@@ -16,7 +19,7 @@ class MainMessage {
   });
 
   String id;
-  User sender;
+  User? sender;
   User? receiver;
   Group? group;
   String content;
@@ -33,14 +36,14 @@ class MainMessage {
         group: json["group"] == null ? null : Group.fromMap(json["group"]),
         content: json["content"],
         type: json["type"],
-        sentAt: DateTime.parse(json["sent_at"]),
+        sentAt: DateTime.parse(json["sent_at"]).toLocal(),
         isRemoved: json["is_removed"],
         isNotification: json["is_notification"],
       );
 
   Map<String, dynamic> toMap() => {
         "_id": id,
-        "sender": sender.toMap(),
+        "sender": sender == null ? null : sender!.toMap(),
         "receiver": receiver == null ? null : receiver!.toMap(),
         "group": group == null ? null : group!.toMap(),
         "content": content,
@@ -49,4 +52,6 @@ class MainMessage {
         "is_removed": isRemoved,
         "is_notification": isNotification,
       };
+
+  void notify() {}
 }

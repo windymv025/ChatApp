@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select your Country"),
         "accept": MessageLookupByLibrary.simpleMessage("Accept"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "add_group_member":
+            MessageLookupByLibrary.simpleMessage("Add group member"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "approval": MessageLookupByLibrary.simpleMessage("Approval"),
@@ -51,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Become a Teacher"),
         "beginner": MessageLookupByLibrary.simpleMessage("Beginner"),
         "birthday": MessageLookupByLibrary.simpleMessage("Birthday"),
+        "block": MessageLookupByLibrary.simpleMessage("Block"),
         "booking_now": MessageLookupByLibrary.simpleMessage("Booking now"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "change_password":
@@ -75,6 +78,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create a new group"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "delete_message":
+            MessageLookupByLibrary.simpleMessage("Delete message"),
         "dont_have_account":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "education": MessageLookupByLibrary.simpleMessage("Education"),
@@ -130,6 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "i_best_teaching_who": MessageLookupByLibrary.simpleMessage(
             "I am best at teaching students who are"),
+        "image": MessageLookupByLibrary.simpleMessage("Image"),
         "interests": MessageLookupByLibrary.simpleMessage("Interests"),
         "introduce_yourself":
             MessageLookupByLibrary.simpleMessage("Introduce yourself"),
@@ -141,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
         "languages_speak":
             MessageLookupByLibrary.simpleMessage("Languages I speak"),
+        "leave_group": MessageLookupByLibrary.simpleMessage("Leave group"),
         "lessons": MessageLookupByLibrary.simpleMessage("Lessons"),
         "let_start": MessageLookupByLibrary.simpleMessage("Let\'s Start!"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
@@ -196,6 +203,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Rating and Comments"),
         "re_enter_your_password":
             MessageLookupByLibrary.simpleMessage("Re-enter your password"),
+        "remove_group_member":
+            MessageLookupByLibrary.simpleMessage("Remove group member"),
         "request": MessageLookupByLibrary.simpleMessage("Request"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
