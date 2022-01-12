@@ -14,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 class ContactProvider extends ChangeNotifier {
   final List<Contact> _contacts = [];
   final List<User> _searchContacts = [];
+  final List<User> _currentUser = [];
 
   final ContactApi _contactApi = ContactApi();
   final UserApi _userApi = UserApi();
@@ -23,6 +24,7 @@ class ContactProvider extends ChangeNotifier {
 
   List<Contact> get contacts => _contacts;
   List<User> get searchContacts => _searchContacts;
+  List<User> get currentUser => _currentUser;
 
   List<Contact> getAcceptContacts(User profile) {
     _profile ??= profile;
@@ -51,32 +53,6 @@ class ContactProvider extends ChangeNotifier {
     }
     return _respontContacts;
   }
-
-  // void getAcceptContacts() {
-  //   _acceptContacts.clear();
-  //   for (var item in _contacts) {
-  //     if (item.isAccepted) {
-  //       _acceptContacts.add(item);
-  //       if (item.userRequested.id == _profile!.id) {
-  //         item.userRequestedTo.state = InContactUserState();
-  //       } else {
-  //         item.userRequested.state = InContactUserState();
-  //       }
-  //     }
-  //   }
-  //   notifyListeners();
-  // }
-
-  // void getRequestContacts() {
-  //   _requestContacts.clear();
-  //   for (var item in _contacts) {
-  //     if (!item.isAccepted && item.userRequested.id != _profile?.id) {
-  //       _requestContacts.add(item);
-  //       item.userRequested.state = RequestUserState();
-  //     }
-  //   }
-  //   notifyListeners();
-  // }
 
   init() async {
     await loadContact();
@@ -179,7 +155,6 @@ class ContactProvider extends ChangeNotifier {
   }
 
   acceptContact(Contact contact) async {
-    // await _contactApi.acceptContact(contact.id);
     await _socketService.acceptContactEmit(contact.id);
     _contacts.firstWhere((element) => element.id == contact.id).isAccepted =
         true;
@@ -219,21 +194,12 @@ class ContactProvider extends ChangeNotifier {
     var contact = _contacts.firstWhere((element) =>
         element.userRequested.id == idUser ||
         element.userRequestedTo.id == idUser);
-    // await _contactApi.removeContact(contact.id);
     await _socketService.removeContactEmit(contact.id);
     _contacts.removeWhere((element) => element.id == contact.id);
     notifyListeners();
   }
 
   addNewContact(User user) async {
-    // var res = await _contactApi.addNewContact(user.id);
-    // if (res['_id'] == null) {
-    //   user.state = NewUserState();
-    // } else {
-    //   var contact = Contact.fromMap(res);
-    //   contact.userRequested.state = RequestUserState();
-    //   _contacts.add(contact);
-    // }
     await _socketService.addContactEmit(user.id);
     await reloadContacts();
     notifyListeners();
@@ -243,7 +209,6 @@ class ContactProvider extends ChangeNotifier {
     var contact = _contacts.where((element) =>
         element.userRequested.id == idUser ||
         element.userRequestedTo.id == idUser);
-    // await _contactApi.acceptContact(contact.id);
     if (contact.isNotEmpty) {
       await _socketService.acceptContactEmit(contact.first.id);
       _contacts
@@ -265,6 +230,20 @@ class ContactProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  changePriority(String idUser) async {
+    var contact = _contacts.where((element) =>
+        element.userRequested.id == idUser ||
+        element.userRequestedTo.id == idUser);
+    if (contact.isNotEmpty) {
+      var res = await _contactApi.changePriority(contact.first.id);
+      if (res['message'] == null) {
+        contact.first.isPriority = !contact.first.isPriority;
+      }
+    }
+
+    notifyListeners();
+  }
+
   void clearSearch() {
     _searchContacts.clear();
     notifyListeners();
@@ -275,5 +254,16 @@ class ContactProvider extends ChangeNotifier {
     _searchContacts.clear();
     _profile = null;
     notifyListeners();
+  }
+
+  void loadCurrentUser() {
+    _currentUser.clear();
+    for (var i in _contacts) {
+      if (i.userRequested.id == _profile?.id) {
+        _currentUser.add(i.userRequestedTo);
+      } else {
+        _currentUser.add(i.userRequested);
+      }
+    }
   }
 }

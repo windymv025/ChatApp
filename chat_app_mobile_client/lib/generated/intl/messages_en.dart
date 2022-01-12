@@ -58,6 +58,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("Change password"),
+        "change_password_success": MessageLookupByLibrary.simpleMessage(
+            "Password changed successfully"),
+        "change_priority":
+            MessageLookupByLibrary.simpleMessage("Change priority"),
+        "change_priority_success": MessageLookupByLibrary.simpleMessage(
+            "Priority changed successfully"),
         "check_email_str": MessageLookupByLibrary.simpleMessage(
             "Check your email then enter the OTP code below"),
         "choose_language":
@@ -94,6 +100,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter lesson room"),
         "enter_new_password":
             MessageLookupByLibrary.simpleMessage("Enter a new password"),
+        "enter_old_password":
+            MessageLookupByLibrary.simpleMessage("Old password"),
         "enter_password":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enter_phone":
@@ -112,6 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phone number is required"),
         "err_phone_invalid":
             MessageLookupByLibrary.simpleMessage("Phone number is invalid"),
+        "error_change_password":
+            MessageLookupByLibrary.simpleMessage("Error changing password"),
         "error_loading_PDF":
             MessageLookupByLibrary.simpleMessage("Error loading PDF"),
         "experience": MessageLookupByLibrary.simpleMessage("Experience"),
@@ -153,14 +163,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "list_topics": MessageLookupByLibrary.simpleMessage("List Topics"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "members": MessageLookupByLibrary.simpleMessage("Members"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "my_specialties_are":
             MessageLookupByLibrary.simpleMessage("My specialties are"),
         "mylevel": MessageLookupByLibrary.simpleMessage("My level"),
         "name_group": MessageLookupByLibrary.simpleMessage("Group name"),
+        "new_pass": MessageLookupByLibrary.simpleMessage("New password"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no_reviews_yet":
             MessageLookupByLibrary.simpleMessage("No reviews yet"),
+        "old_pass_wrong":
+            MessageLookupByLibrary.simpleMessage("Old password is wrong"),
         "or_continue_with":
             MessageLookupByLibrary.simpleMessage("Or continue with"),
         "otp_is_invalid": MessageLookupByLibrary.simpleMessage(

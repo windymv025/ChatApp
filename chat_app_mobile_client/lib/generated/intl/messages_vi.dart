@@ -58,6 +58,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đặt lịch học ngay"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
         "change_password": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
+        "change_password_success": MessageLookupByLibrary.simpleMessage(
+            "Thay đổi mật khẩu thành công"),
+        "change_priority": MessageLookupByLibrary.simpleMessage("Đổi ưu tiên"),
+        "change_priority_success":
+            MessageLookupByLibrary.simpleMessage("Đổi ưu tiên thành công"),
         "check_email_str": MessageLookupByLibrary.simpleMessage(
             "Kiểm tra email của bạn để nhận mã OTP"),
         "choose_language":
@@ -94,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vào phòng học"),
         "enter_new_password":
             MessageLookupByLibrary.simpleMessage("Nhập mật khẩu mới"),
+        "enter_old_password":
+            MessageLookupByLibrary.simpleMessage("Mật khẩu cũ"),
         "enter_password":
             MessageLookupByLibrary.simpleMessage("Nhập mật khẩu của bạn"),
         "enter_phone":
@@ -112,6 +119,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hãy nhập số điện thoại của bạn"),
         "err_phone_invalid":
             MessageLookupByLibrary.simpleMessage("Số điện thoại không đúng"),
+        "error_change_password":
+            MessageLookupByLibrary.simpleMessage("Lỗi thay đổi mật khẩu"),
         "error_loading_PDF":
             MessageLookupByLibrary.simpleMessage("Lỗi tải PDF"),
         "experience": MessageLookupByLibrary.simpleMessage("Kinh nghiệm"),
@@ -153,14 +162,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "light": MessageLookupByLibrary.simpleMessage("Sáng"),
         "list_topics": MessageLookupByLibrary.simpleMessage("Danh sách chủ đề"),
         "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
+        "members": MessageLookupByLibrary.simpleMessage("Thành viên"),
         "message": MessageLookupByLibrary.simpleMessage("Tin nhắn"),
         "my_specialties_are":
             MessageLookupByLibrary.simpleMessage("Chuyên môn của tôi"),
         "mylevel": MessageLookupByLibrary.simpleMessage("Cấp độ"),
         "name_group": MessageLookupByLibrary.simpleMessage("Tên nhóm"),
+        "new_pass": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp"),
         "no_reviews_yet":
             MessageLookupByLibrary.simpleMessage("Chưa có đánh giá"),
+        "old_pass_wrong":
+            MessageLookupByLibrary.simpleMessage("Mật khẩu cũ không đúng"),
         "or_continue_with":
             MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
         "otp_is_invalid": MessageLookupByLibrary.simpleMessage(

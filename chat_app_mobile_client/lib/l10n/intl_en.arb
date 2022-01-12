@@ -170,5 +170,13 @@
     "add_group_member":"Add group member",
     "remove_group_member":"Remove group member",
     "leave_group":"Leave group",
-    "delete_message":"Delete message"
+    "delete_message":"Delete message",
+    "old_pass_wrong":"Old password is wrong",
+    "enter_old_password":"Old password",
+    "new_pass":"New password",
+    "error_change_password":"Error changing password",
+    "change_password_success":"Password changed successfully",
+    "change_priority":"Change priority",
+    "members":"Members",
+    "change_priority_success":"Priority changed successfully"
 }

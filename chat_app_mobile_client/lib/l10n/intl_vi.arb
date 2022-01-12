@@ -171,5 +171,13 @@
     "add_group_member":"Thêm thành viên",
     "remove_group_member":"Xóa thành viên",
     "leave_group":"Rời nhóm",
-    "delete_message":"Xóa tin nhắn"
+    "delete_message":"Xóa tin nhắn",
+    "old_pass_wrong":"Mật khẩu cũ không đúng",
+    "enter_old_password":"Mật khẩu cũ",
+    "new_pass":"Mật khẩu mới",
+    "error_change_password":"Lỗi thay đổi mật khẩu",
+    "change_password_success":"Thay đổi mật khẩu thành công",
+    "change_priority":"Đổi ưu tiên",
+    "members":"Thành viên",
+    "change_priority_success":"Đổi ưu tiên thành công"
 }

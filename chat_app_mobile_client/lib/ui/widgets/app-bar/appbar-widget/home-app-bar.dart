@@ -1,4 +1,5 @@
 import 'package:chat_app_mobile_client/constants/assets.dart';
+import 'package:chat_app_mobile_client/constants/enums.dart';
 import 'package:chat_app_mobile_client/constants/styles.dart';
 import 'package:chat_app_mobile_client/generated/l10n.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
@@ -52,7 +53,8 @@ class _HomeAppBarState extends State<HomeAppBar>
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(SearchScreen.routeName);
+                Navigator.of(context).pushNamed(SearchScreen.routeName,
+                    arguments: TypebodySearch.contact);
               },
               icon: const Icon(
                 Icons.search_rounded,

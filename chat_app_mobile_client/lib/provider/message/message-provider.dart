@@ -85,8 +85,7 @@ class MessageProvider extends ChangeNotifier {
             isRemoved: message.isRemoved,
             isNotification: message.isNotification);
         _messages.add(newMessage);
-      }
-      if (message.sender?.id != _profile?.id) {
+      } else if (message.sender?.id != _profile?.id) {
         updateMessage(message);
       }
     }
@@ -94,17 +93,35 @@ class MessageProvider extends ChangeNotifier {
   }
 
   void updateMessage(MainMessage message) {
-    var mainMessage = _mainMessages.where((element) =>
-        element.receiver?.id == message.sender?.id ||
-        element.group?.id == message.group?.id);
-    if (mainMessage.isNotEmpty) {
-      mainMessages.first.content = message.content;
-      mainMessages.first.sentAt = message.sentAt;
-      mainMessages.first.isRemoved = message.isRemoved;
-      mainMessages.first.isNotification = message.isNotification;
-      mainMessages.first.type = message.type;
-      mainMessages.first.sender = message.sender;
-      mainMessages.first.notify();
+    if (message.group != null) {
+      var messGroup = _mainMessages
+          .where((element) => element.group?.id == message.group?.id);
+      if (messGroup.isNotEmpty) {
+        messGroup.first.content = message.content;
+        messGroup.first.sentAt = message.sentAt;
+        messGroup.first.isRemoved = message.isRemoved;
+        messGroup.first.isNotification = message.isNotification;
+        messGroup.first.type = message.type;
+        messGroup.first.sender = message.sender;
+        messGroup.first.notify();
+        return;
+      }
+    } else if (message.receiver != null) {
+      var messTemp = _mainMessages.where((element) =>
+          element.receiver?.id == message.receiver?.id ||
+          element.sender?.id == message.receiver?.id);
+      if (messTemp.isNotEmpty) {
+        messTemp.first.content = message.content;
+        messTemp.first.sentAt = message.sentAt;
+        messTemp.first.isRemoved = message.isRemoved;
+        messTemp.first.isNotification = message.isNotification;
+        messTemp.first.type = message.type;
+        messTemp.first.sender = message.sender;
+        messTemp.first.notify();
+        return;
+      } else {
+        _mainMessages.add(message);
+      }
     }
   }
 
@@ -161,22 +178,26 @@ class MessageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  loadGroupMessage(String groupId) async {
+  loadGroupMessage(String groupId) {
     _messages.clear();
-    var res = await _messageApi.getGroupMessages(groupId);
-    for (var item in res) {
-      _messages.add(Message.fromMap(item));
-    }
-    notifyListeners();
+    _messageApi.getGroupMessages(groupId).then((res) {
+      _messages.clear();
+      for (var item in res) {
+        _messages.add(Message.fromMap(item));
+      }
+      notifyListeners();
+    });
   }
 
-  loadInvidualMessage(String userId) async {
+  loadInvidualMessage(String userId) {
     _messages.clear();
-    var res = await _messageApi.getInvidualMessages(userId);
-    for (var item in res) {
-      _messages.add(Message.fromMap(item));
-    }
-    notifyListeners();
+    _messageApi.getInvidualMessages(userId).then((res) {
+      _messages.clear();
+      for (var item in res) {
+        _messages.add(Message.fromMap(item));
+      }
+      notifyListeners();
+    });
   }
 
   void clearMessages() {
@@ -191,8 +212,8 @@ class MessageProvider extends ChangeNotifier {
   }
 
   bool checkIsPriorityContact(MainMessage element, List<Contact> contacts) {
-    return (element.group?.isPriority == true) ||
-        (element.sender?.id == _profile?.id &&
+    if (element.group != null) return element.group!.isPriority;
+    return (element.sender?.id == _profile?.id &&
             checkHaveUserInContact(element.receiver, contacts) &&
             checkUserIsPriority(element.receiver, contacts)) ||
         (element.sender?.id != _profile?.id &&
@@ -201,7 +222,8 @@ class MessageProvider extends ChangeNotifier {
   }
 
   bool checkIsNormalContact(MainMessage element, List<Contact> contacts) {
-    if (element.group?.isPriority == true) return false;
+    if (element.group != null) return !element.group!.isPriority;
+
     return (element.sender?.id == _profile?.id &&
             (!checkHaveUserInContact(element.receiver, contacts) ||
                 !checkUserIsPriority(element.receiver, contacts))) ||
@@ -225,5 +247,14 @@ class MessageProvider extends ChangeNotifier {
             element.userRequestedTo.id == receiver?.id)
         .first
         .isPriority;
+  }
+
+  void changeGroupPriority(String groupId) {
+    var group = _mainMessages
+        .where((element) => element.group?.id == groupId)
+        .first
+        .group;
+    group?.isPriority = !group.isPriority;
+    notifyListeners();
   }
 }

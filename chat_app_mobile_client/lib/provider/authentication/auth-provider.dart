@@ -42,7 +42,6 @@ class AuthProvider extends ChangeNotifier {
     if (res.containsKey("user")) {
       profile = User.fromMap(res["user"]);
       profile.password = password;
-      // await saveToken(res["access_token"]);
       await saveProfile(password);
       notifyListeners();
 
@@ -68,27 +67,17 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // Future<bool> loginAgain() async {
-  //   var prefs = await SharedPreferenceHelper.instance;
-  //   var p = await prefs.profile;
-  //   if (p != null) {
-  //     String email = p.email;
-  //     String password = await prefs.password ?? "";
-
-  //     return await login(email, password);
-  //   }
-
-  //   return false;
-  // }
-
   saveProfile(String password) async {
     var prefs = await SharedPreferenceHelper.instance;
+    await prefs.removeProfile();
+    await prefs.removePassword();
     await prefs.saveProfile(profile);
     await prefs.savePassword(password);
   }
 
   saveToken(String token) async {
     var prefs = await SharedPreferenceHelper.instance;
+    await prefs.removeAuthToken();
     await prefs.saveAuthToken(token);
   }
 
@@ -140,6 +129,18 @@ class AuthProvider extends ChangeNotifier {
     print(profile.name);
     var req = await authApi.changeProfile(profile.name, passHash);
     if (req != null) {
+      saveProfile(profile.password!);
+      notifyListeners();
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> changePassword(String newPassword) async {
+    var passHash = md5Hash(newPassword);
+    var req = await authApi.changeProfile(profile.name, passHash);
+    if (req != null) {
+      profile.password = newPassword;
       saveProfile(profile.password!);
       notifyListeners();
       return true;

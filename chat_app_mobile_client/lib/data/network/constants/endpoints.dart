@@ -35,4 +35,6 @@ class Endpoints {
   static const String addInvidualMessage = "/message/invidual/add";
   static const String addGroupMessage = "/message/group/add";
   static const String changeProfile = "/info/edit";
+  static const String changePriority = "/contacts/priority";
+  static const String changeGroupPriority = "/group/changePriority";
 }

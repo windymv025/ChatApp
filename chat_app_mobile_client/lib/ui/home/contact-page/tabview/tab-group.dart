@@ -26,21 +26,24 @@ class TabGroup extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 5),
         itemBuilder: (BuildContext context, int index) {
           Group value = groupProvider.groups[index];
-          return ListTile(
-            onTap: () {
-              messageProvider.loadGroupMessage(value.id);
-              Navigator.of(context)
-                  .pushNamed(MessageScreen.routeName, arguments: value);
-            },
-            leading: CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.grey.shade100,
-              child: Text(
-                  "${value.name[0].toUpperCase()}${value.name[value.name.length - 1].toUpperCase()}"),
-            ),
-            title: Text(
-              value.name,
-              style: titleStyle,
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: ListTile(
+              onTap: () {
+                messageProvider.loadGroupMessage(value.id);
+                Navigator.of(context)
+                    .pushNamed(MessageScreen.routeName, arguments: value);
+              },
+              leading: CircleAvatar(
+                radius: 40,
+                backgroundColor: Colors.grey.shade100,
+                child: Text(
+                    "${value.name[0].toUpperCase()}${value.name[value.name.length - 1].toUpperCase()}"),
+              ),
+              title: Text(
+                value.name,
+                style: titleStyle,
+              ),
             ),
           );
         },

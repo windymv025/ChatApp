@@ -4,6 +4,8 @@ import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dar
 import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
 import 'package:chat_app_mobile_client/provider/group/group-provider.dart';
 import 'package:chat_app_mobile_client/provider/home/home-provider.dart';
+import 'package:chat_app_mobile_client/provider/message/message-provider.dart';
+import 'package:chat_app_mobile_client/ui/change-password/change-password-screen.dart';
 import 'package:chat_app_mobile_client/ui/home/setting-page/components/settings_button.dart';
 import 'package:chat_app_mobile_client/ui/profile/profile-screen.dart';
 import 'package:chat_app_mobile_client/ui/signin/signin_screen.dart';
@@ -26,6 +28,8 @@ class _SettingPageState extends State<SettingPage> {
     HomeProvider homeProvider = context.read();
     ContactProvider contactProvider = context.read();
     GroupProvider groupProvider = context.read();
+    MessageProvider messageProvider = context.read();
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
@@ -39,13 +43,15 @@ class _SettingPageState extends State<SettingPage> {
             ),
             title: S.of(context).account,
           ),
-          // SettingsButton(
-          //   icon: const Icon(
-          //     Icons.vpn_key_rounded,
-          //     color: kMainBlueColor,
-          //   ),
-          //   title: S.of(context).change_password,
-          // ),
+          SettingsButton(
+            onPress: () =>
+                Navigator.pushNamed(context, ChangePasswordScreen.routeName),
+            icon: const Icon(
+              Icons.vpn_key_rounded,
+              color: kMainBlueColor,
+            ),
+            title: S.of(context).change_password,
+          ),
           SettingsButton(
               onPress: null,
               icon: const Icon(
@@ -69,6 +75,9 @@ class _SettingPageState extends State<SettingPage> {
 
               contactProvider.clean();
               groupProvider.clean();
+              authProvider.clean();
+              messageProvider.clear();
+
               authProvider.clean();
 
               Navigator.pushReplacementNamed(context, SignInScreen.routeName);

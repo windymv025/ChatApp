@@ -1559,6 +1559,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Old password is wrong`
+  String get old_pass_wrong {
+    return Intl.message(
+      'Old password is wrong',
+      name: 'old_pass_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Old password`
+  String get enter_old_password {
+    return Intl.message(
+      'Old password',
+      name: 'enter_old_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New password`
+  String get new_pass {
+    return Intl.message(
+      'New password',
+      name: 'new_pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error changing password`
+  String get error_change_password {
+    return Intl.message(
+      'Error changing password',
+      name: 'error_change_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully`
+  String get change_password_success {
+    return Intl.message(
+      'Password changed successfully',
+      name: 'change_password_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change priority`
+  String get change_priority {
+    return Intl.message(
+      'Change priority',
+      name: 'change_priority',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Members`
+  String get members {
+    return Intl.message(
+      'Members',
+      name: 'members',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Priority changed successfully`
+  String get change_priority_success {
+    return Intl.message(
+      'Priority changed successfully',
+      name: 'change_priority_success',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,6 +1,7 @@
 import 'package:chat_app_mobile_client/constants/colors.dart';
 import 'package:chat_app_mobile_client/generated/l10n.dart';
 import 'package:chat_app_mobile_client/models/message.dart';
+import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
 import 'package:chat_app_mobile_client/provider/message/message-provider.dart';
 import 'package:chat_app_mobile_client/ui/message/components/item_message_notify.dart';
 import 'package:chat_app_mobile_client/ui/message/components/item_message_receiver.dart';
@@ -20,11 +21,13 @@ class _BodyChatState extends State<BodyChat> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _controller = TextEditingController();
   late MessageProvider provider;
+  late AuthProvider authProvider;
 
   @override
   didChangeDependencies() {
     super.didChangeDependencies();
     provider = Provider.of<MessageProvider>(context);
+    authProvider = Provider.of<AuthProvider>(context);
   }
 
   bool isSend = false;
@@ -41,7 +44,7 @@ class _BodyChatState extends State<BodyChat> {
         }
       },
       child: Container(
-          color: Colors.white,
+          color: Theme.of(context).scaffoldBackgroundColor,
           child: SizedBox(
             width: size.width,
             height: size.height,
@@ -72,8 +75,7 @@ class _BodyChatState extends State<BodyChat> {
     if (message.isNotification) {
       return ItemMessageNotify(message: message.content);
     }
-    if (message.sender.id == provider.inChatId ||
-        message.group?.id == provider.inChatId) {
+    if (message.sender.id != authProvider.profile.id) {
       return ItemMessageReceiver(message: message);
     } else {
       return ItemMessageSender(message: message);
@@ -142,7 +144,7 @@ class _BodyChatState extends State<BodyChat> {
       if (widget.type == MessageScreen.typeInvidual) {
         provider.sendMessage(message, userId: id);
       } else {
-        provider.sendMessage(message, groupId: id);
+        provider.sendMessage(message, groupId: id, userId: null);
       }
       _controller.text = "";
     });
