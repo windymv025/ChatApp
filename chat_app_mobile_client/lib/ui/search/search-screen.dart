@@ -1,10 +1,7 @@
 import 'package:chat_app_mobile_client/constants/enums.dart';
-import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
-import 'package:chat_app_mobile_client/ui/search/adpter/search-adapter.dart';
 import 'package:chat_app_mobile_client/ui/search/factory/body-search-factory.dart';
 import 'package:chat_app_mobile_client/ui/widgets/app-bar/app-bar-factory.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
   static const routeName = '/search';
