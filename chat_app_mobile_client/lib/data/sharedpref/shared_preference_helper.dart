@@ -7,90 +7,94 @@ import 'constants/preferences.dart';
 
 class SharedPreferenceHelper {
   // shared pref instance
-  SharedPreferences? _sharedPreference;
+
   static SharedPreferenceHelper? _instance;
 
-  static Future<SharedPreferenceHelper> get instance async {
+  static SharedPreferenceHelper get instance {
     _instance ??= SharedPreferenceHelper._();
     return _instance!;
   }
 
-  // constructor
-  // SharedPreferenceHelper(this._sharedPreference?);
-  SharedPreferenceHelper._() {
-    _init();
-  }
-
-  _init() {
-    SharedPreferences.getInstance().then((prefs) {
-      _sharedPreference = prefs;
-    });
-  }
-
+  SharedPreferenceHelper._();
   // General Methods: ----------------------------------------------------------
   Future<String?> get authToken async {
-    return _sharedPreference?.getString(Preferences.authToken);
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.getString(Preferences.authToken);
   }
 
   Future<bool> saveAuthToken(String authToken) async {
-    return _sharedPreference!.setString(Preferences.authToken, authToken);
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.setString(Preferences.authToken, authToken);
   }
 
   Future<bool> removeAuthToken() async {
-    return _sharedPreference!.remove(Preferences.authToken);
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.remove(Preferences.authToken);
   }
 
   // Login:---------------------------------------------------------------------
   Future<bool> get isLoggedIn async {
-    return _sharedPreference?.getBool(Preferences.isLoggedIn) ?? false;
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.getBool(Preferences.isLoggedIn) ?? false;
   }
 
   Future<bool> saveIsLoggedIn(bool value) async {
-    return _sharedPreference!.setBool(Preferences.isLoggedIn, value);
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.setBool(Preferences.isLoggedIn, value);
   }
 
   //profile:--------------------------------------------------------------------
   Future<bool> saveProfile(User profile) async {
-    return _sharedPreference!.setString(Preferences.profile, profile.toJson());
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.setString(Preferences.profile, profile.toJson());
   }
 
   Future<User?> get profile async {
-    if (_sharedPreference?.getString(Preferences.profile) == null) return null;
-    return User.fromJson(_sharedPreference!.getString(Preferences.profile)!);
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    if (_sharedPreference.getString(Preferences.profile) == null) return null;
+    return User.fromJson(_sharedPreference.getString(Preferences.profile)!);
   }
 
   Future<bool> removeProfile() async {
-    return _sharedPreference!.remove(Preferences.profile);
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.remove(Preferences.profile);
   }
 
   //Password:-------------------------------------------------------------------
   Future<bool> savePassword(String password) async {
-    return _sharedPreference!.setString(Preferences.password, password);
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.setString(Preferences.password, password);
   }
 
   Future<String?> get password async {
-    return _sharedPreference?.getString(Preferences.password);
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.getString(Preferences.password);
   }
 
   Future<bool> removePassword() async {
-    return _sharedPreference!.remove(Preferences.password);
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.remove(Preferences.password);
   }
 
   // Theme:------------------------------------------------------
-  bool get isDarkMode {
-    return _sharedPreference?.getBool(Preferences.isDarkMode) ?? false;
+  Future<bool> get isDarkMode async {
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.getBool(Preferences.isDarkMode) ?? false;
   }
 
-  Future<void> changeBrightnessToDark(bool value) {
-    return _sharedPreference!.setBool(Preferences.isDarkMode, value);
+  Future<bool> changeBrightnessToDark(bool value) async {
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.setBool(Preferences.isDarkMode, value);
   }
 
   // Language:---------------------------------------------------
-  String? get currentLanguage {
-    return _sharedPreference?.getString(Preferences.currentLanguage);
+  Future<String?> get currentLanguage async {
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.getString(Preferences.currentLanguage);
   }
 
-  Future<void> changeLanguage(String language) {
-    return _sharedPreference!.setString(Preferences.currentLanguage, language);
+  Future<bool> changeLanguage(String language) async {
+    SharedPreferences _sharedPreference = await SharedPreferences.getInstance();
+    return _sharedPreference.setString(Preferences.currentLanguage, language);
   }
 }

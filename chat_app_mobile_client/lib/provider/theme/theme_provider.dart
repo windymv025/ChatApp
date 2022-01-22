@@ -18,9 +18,10 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   void _loadTheme() async {
-    _prefHelper = await SharedPreferenceHelper.instance;
+    _prefHelper = SharedPreferenceHelper.instance;
+    bool? isDark = await _prefHelper.isDarkMode;
 
-    if (_prefHelper.isDarkMode == true) {
+    if (isDark == true) {
       typeName = kStringDarkTheme;
     } else {
       typeName = kStringLightTheme;

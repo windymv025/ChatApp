@@ -11,8 +11,8 @@ class SocketService {
   String idProfile = "";
 
   SocketService._() {
-    SharedPreferenceHelper.instance
-        .then((value) => value.profile.then((value) => idProfile = value!.id));
+    SharedPreferenceHelper.instance.profile
+        .then((value) => idProfile = value!.id);
 
     if (socket != null) {
       socket?.disconnect();
