@@ -33,8 +33,8 @@ class _SignInFormState extends State<SignInForm> {
   void initState() {
     super.initState();
     profile = context.read<AuthProvider>();
-    email = profile.profile.email;
-    password = profile.profile.password;
+    email = profile.profile?.email;
+    password = profile.profile?.password;
   }
 
   void addError(String error) {

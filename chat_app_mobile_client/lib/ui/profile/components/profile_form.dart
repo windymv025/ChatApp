@@ -27,7 +27,7 @@ class _ProfileFormState extends State<ProfileForm> {
           children: [
             // email
             TextFormField(
-              initialValue: profile.profile.email,
+              initialValue: profile.profile?.email,
               enabled: false,
               decoration: const InputDecoration(
                 label: Text('Email'),
@@ -41,9 +41,10 @@ class _ProfileFormState extends State<ProfileForm> {
 
             // fullname
             TextFormField(
-              initialValue: profile.profile.name,
+              initialValue: profile.profile?.name,
               keyboardType: TextInputType.name,
-              onSaved: (newValue) => profile.profile.name = newValue!,
+              onSaved: (newValue) =>
+                  profile.profile?.name = newValue.toString(),
               onChanged: (value) {
                 return;
               },

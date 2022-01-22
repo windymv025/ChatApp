@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:chat_app_mobile_client/data/network/apis/authentication/auth-api.dart';
 import 'package:chat_app_mobile_client/data/sharedpref/shared_preference_helper.dart';
 import 'package:chat_app_mobile_client/models/user.dart';
-import 'package:chat_app_mobile_client/service/socket-service.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -15,7 +14,8 @@ class AuthProvider extends ChangeNotifier {
     _init();
   }
 
-  late User profile;
+  User? _profile;
+  User? get profile => _profile;
   AuthApi authApi = AuthApi();
   String message = "";
 
@@ -23,8 +23,8 @@ class AuthProvider extends ChangeNotifier {
     var passHash = md5Hash(password);
     var res = await authApi.login(email, passHash) as Map;
     if (res.containsKey("user")) {
-      profile = User.fromMap(res["user"]);
-      profile.password = password;
+      _profile = User.fromMap(res["user"]);
+      _profile?.password = password;
       await saveToken(res["access_token"]);
       await saveProfile(password);
       notifyListeners();
@@ -40,8 +40,8 @@ class AuthProvider extends ChangeNotifier {
     var passHash = md5Hash(password);
     var res = await authApi.register(email, passHash, name) as Map;
     if (res.containsKey("user")) {
-      profile = User.fromMap(res["user"]);
-      profile.password = password;
+      _profile = User.fromMap(res["user"]);
+      _profile?.password = password;
       await saveProfile(password);
       notifyListeners();
 
@@ -56,7 +56,7 @@ class AuthProvider extends ChangeNotifier {
   Future<bool> auth() async {
     var res = await authApi.auth() as Map;
     if (res.containsKey("user")) {
-      profile = User.fromMap(res["user"]);
+      _profile = User.fromMap(res["user"]);
       notifyListeners();
       return true;
     } else {
@@ -68,28 +68,28 @@ class AuthProvider extends ChangeNotifier {
   }
 
   saveProfile(String password) async {
-    var prefs = await SharedPreferenceHelper.instance;
+    var prefs = SharedPreferenceHelper.instance;
     await prefs.removeProfile();
     await prefs.removePassword();
-    await prefs.saveProfile(profile);
+    await prefs.saveProfile(_profile!);
     await prefs.savePassword(password);
   }
 
   saveToken(String token) async {
-    var prefs = await SharedPreferenceHelper.instance;
+    var prefs = SharedPreferenceHelper.instance;
     await prefs.removeAuthToken();
     await prefs.saveAuthToken(token);
   }
 
   loadProfile() async {
-    var prefs = await SharedPreferenceHelper.instance;
-    var profileTemp = await prefs.profile;
+    var prefs = SharedPreferenceHelper.instance;
+    var _profileTemp = await prefs.profile;
     var passwordTemp = await prefs.password;
-    if (profileTemp != null && passwordTemp != null) {
-      profile = profileTemp;
-      profile.password = passwordTemp;
+    if (_profileTemp != null && passwordTemp != null) {
+      _profile = _profileTemp;
+      _profile?.password = passwordTemp;
     } else {
-      profile = User(
+      _profile = User(
           id: "",
           name: "",
           email: "",
@@ -101,12 +101,12 @@ class AuthProvider extends ChangeNotifier {
   }
 
   resetProfile() async {
-    var prefs = await SharedPreferenceHelper.instance;
+    var prefs = SharedPreferenceHelper.instance;
     await prefs.removeProfile();
   }
 
   void logout() async {
-    var prefs = await SharedPreferenceHelper.instance;
+    var prefs = SharedPreferenceHelper.instance;
     await prefs.removeProfile();
     await prefs.removeAuthToken();
     notifyListeners();
@@ -124,12 +124,12 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<bool> updateProfile() async {
-    var passHash = md5Hash(profile.password!);
+    var passHash = md5Hash(_profile!.password!);
     // ignore: avoid_print
-    print(profile.name);
-    var req = await authApi.changeProfile(profile.name, passHash);
+    print(_profile?.name);
+    var req = await authApi.changeProfile(_profile!.name, passHash);
     if (req != null) {
-      saveProfile(profile.password!);
+      saveProfile(_profile!.password!);
       notifyListeners();
       return true;
     }
@@ -138,10 +138,10 @@ class AuthProvider extends ChangeNotifier {
 
   Future<bool> changePassword(String newPassword) async {
     var passHash = md5Hash(newPassword);
-    var req = await authApi.changeProfile(profile.name, passHash);
+    var req = await authApi.changeProfile(_profile!.name, passHash);
     if (req != null) {
-      profile.password = newPassword;
-      saveProfile(profile.password!);
+      _profile?.password = newPassword;
+      saveProfile(_profile!.password!);
       notifyListeners();
       return true;
     }

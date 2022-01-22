@@ -4,7 +4,6 @@ import 'package:chat_app_mobile_client/data/sharedpref/shared_preference_helper.
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  // prototype
   static final Map<String, ThemeData> _themes = {
     kStringLightTheme: themeDataLight,
     kStringDarkTheme: themeDataDark,
@@ -20,7 +19,6 @@ class ThemeProvider extends ChangeNotifier {
   void _loadTheme() async {
     _prefHelper = SharedPreferenceHelper.instance;
     bool? isDark = await _prefHelper.isDarkMode;
-
     if (isDark == true) {
       typeName = kStringDarkTheme;
     } else {

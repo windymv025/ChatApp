@@ -26,7 +26,8 @@ class ContactProvider extends ChangeNotifier {
   List<User> get searchContacts => _searchContacts;
   List<User> get currentUser => _currentUser;
 
-  List<Contact> getAcceptContacts(User profile) {
+  List<Contact> getAcceptContacts(User? profile) {
+    if (profile == null) return [];
     _profile ??= profile;
     final List<Contact> _acceptContacts = [];
     for (var item in _contacts) {
@@ -42,7 +43,8 @@ class ContactProvider extends ChangeNotifier {
     return _acceptContacts;
   }
 
-  List<Contact> getRequestContacts(User profile) {
+  List<Contact> getRequestContacts(User? profile) {
+    if (profile == null) return [];
     _profile ??= profile;
     final List<Contact> _respontContacts = [];
     for (var item in _contacts) {
@@ -110,7 +112,8 @@ class ContactProvider extends ChangeNotifier {
     }
   }
 
-  void searchContact(String keyword, User profile) async {
+  void searchContact(String keyword, User? profile) async {
+    if (profile == null) return;
     _profile = profile;
     _searchContacts.clear();
     notifyListeners();

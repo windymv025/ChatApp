@@ -1,8 +1,6 @@
-import 'package:chat_app_mobile_client/constants/assets.dart';
 import 'package:chat_app_mobile_client/constants/enums.dart';
 import 'package:chat_app_mobile_client/constants/styles.dart';
 import 'package:chat_app_mobile_client/generated/l10n.dart';
-import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
 import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
 import 'package:chat_app_mobile_client/provider/home/home-provider.dart';
@@ -10,6 +8,7 @@ import 'package:chat_app_mobile_client/provider/message/message-provider.dart';
 import 'package:chat_app_mobile_client/ui/profile/profile-screen.dart';
 import 'package:chat_app_mobile_client/ui/search/search-screen.dart';
 import 'package:chat_app_mobile_client/ui/widgets/button/circle_avatar_button.dart';
+import 'package:chat_app_mobile_client/utils/helper/function-helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
@@ -87,13 +86,5 @@ class _HomeAppBarState extends State<HomeAppBar>
         ),
       ),
     );
-  }
-
-  ImageProvider? getImage(User profile) {
-    if (profile.imageUrl.isNotEmpty) {
-      return NetworkImage(profile.imageUrl);
-    } else {
-      return const AssetImage(Assets.assetsImagesUserIcon);
-    }
   }
 }

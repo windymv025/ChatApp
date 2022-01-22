@@ -5,6 +5,7 @@ import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dar
 import 'package:chat_app_mobile_client/ui/profile/profile-screen.dart';
 import 'package:chat_app_mobile_client/ui/search/search-screen.dart';
 import 'package:chat_app_mobile_client/ui/widgets/button/circle_avatar_button.dart';
+import 'package:chat_app_mobile_client/utils/helper/function-helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
@@ -50,13 +51,5 @@ class _RequestAppBarState extends State<RequestAppBar> {
             ))
       ],
     );
-  }
-
-  ImageProvider? getImage(User profile) {
-    if (profile.imageUrl.isNotEmpty) {
-      return NetworkImage(profile.imageUrl);
-    } else {
-      return const AssetImage(Assets.assetsImagesUserIcon);
-    }
   }
 }

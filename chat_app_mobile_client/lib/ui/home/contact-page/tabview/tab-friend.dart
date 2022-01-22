@@ -1,7 +1,4 @@
-import 'package:chat_app_mobile_client/constants/assets.dart';
-import 'package:chat_app_mobile_client/constants/styles.dart';
 import 'package:chat_app_mobile_client/models/contact.dart';
-import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:chat_app_mobile_client/provider/authentication/auth-provider.dart';
 import 'package:chat_app_mobile_client/provider/contact/contact-provider.dart';
 import 'package:chat_app_mobile_client/ui/home/contact-page/tabview/friend-factory/friend-factory.dart';

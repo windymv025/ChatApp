@@ -45,7 +45,7 @@ class _ChangePassBodyState extends State<ChangePassBody> {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = context.read<AuthProvider>();
-    _oudPass = authProvider.profile.password;
+    _oudPass = authProvider.profile?.password;
     return SingleChildScrollView(
       child: Form(
         key: _formKey,

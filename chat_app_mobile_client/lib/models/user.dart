@@ -1,10 +1,6 @@
 import 'dart:convert';
 
-import 'package:chat_app_mobile_client/data/network/apis/contact/contact-api.dart';
-import 'package:chat_app_mobile_client/models/user-state/in-contact-user-state.dart';
-import 'package:chat_app_mobile_client/models/user-state/new-user-state.dart';
 import 'package:chat_app_mobile_client/models/user-state/request-user-sate.dart';
-import 'package:chat_app_mobile_client/models/user-state/response-add-user-state.dart';
 import 'package:chat_app_mobile_client/models/user-state/user-state.dart';
 import 'package:flutter/material.dart';
 

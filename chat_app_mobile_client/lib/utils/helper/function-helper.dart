@@ -3,8 +3,8 @@ import 'package:chat_app_mobile_client/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-ImageProvider? getImage(User profile) {
-  if (profile.imageUrl.isNotEmpty) {
+ImageProvider? getImage(User? profile) {
+  if (profile != null && profile.imageUrl.isNotEmpty) {
     return NetworkImage(profile.imageUrl);
   } else {
     return const AssetImage(Assets.assetsImagesUserIcon);

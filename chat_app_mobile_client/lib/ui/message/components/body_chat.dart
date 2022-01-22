@@ -75,7 +75,7 @@ class _BodyChatState extends State<BodyChat> {
     if (message.isNotification) {
       return ItemMessageNotify(message: message.content);
     }
-    if (message.sender.id != authProvider.profile.id) {
+    if (message.sender.id != authProvider.profile?.id) {
       return ItemMessageReceiver(message: message);
     } else {
       return ItemMessageSender(message: message);

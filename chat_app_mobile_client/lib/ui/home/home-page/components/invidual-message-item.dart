@@ -38,7 +38,7 @@ class _InvidualMessageItemState extends State<InvidualMessageItem> {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = context.read<AuthProvider>();
-    User? user = widget.value.sender?.id != authProvider.profile.id
+    User? user = widget.value.sender?.id != authProvider.profile?.id
         ? widget.value.sender
         : widget.value.receiver;
     final MessageProvider messageProvider = context.read();

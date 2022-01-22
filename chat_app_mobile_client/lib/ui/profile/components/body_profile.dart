@@ -93,7 +93,8 @@ class _BodyProfileState extends State<BodyProfile> {
     );
   }
 
-  ImageProvider getImage(User profile) {
+  ImageProvider getImage(User? profile) {
+    if (profile == null) return const AssetImage(Assets.assetsImagesUserIcon);
     if (profile.imageUrl.isNotEmpty) {
       return NetworkImage(profile.imageUrl);
     } else {

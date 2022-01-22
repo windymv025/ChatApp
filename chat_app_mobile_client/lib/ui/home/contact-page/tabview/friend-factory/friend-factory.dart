@@ -4,9 +4,9 @@ import 'package:chat_app_mobile_client/ui/home/contact-page/tabview/components/f
 import 'package:flutter/cupertino.dart';
 
 class FriendFactory {
-  Widget getFriendItem(Contact contact, User profile) {
+  Widget getFriendItem(Contact contact, User? profile) {
     User friend = contact.userRequested;
-    if (contact.userRequested.id == profile.id) {
+    if (contact.userRequested.id == profile?.id) {
       friend = contact.userRequestedTo;
     } else {
       friend = contact.userRequested;

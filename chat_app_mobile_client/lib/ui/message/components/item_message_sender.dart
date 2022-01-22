@@ -36,7 +36,10 @@ class _ItemMessageSenderState extends State<ItemMessageSender> {
         children: [
           Container(
               margin: const EdgeInsets.only(top: 5, left: 8),
-              child: Text(authProvider.profile.name,
+              child: Text(
+                  authProvider.profile != null
+                      ? authProvider.profile!.name
+                      : "",
                   style: const TextStyle(color: Colors.black))),
           Container(
             constraints:

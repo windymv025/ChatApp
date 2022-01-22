@@ -61,7 +61,7 @@ class MessageProvider extends ChangeNotifier {
   }
 
   getProfile() async {
-    var prefs = await SharedPreferenceHelper.instance;
+    var prefs = SharedPreferenceHelper.instance;
     var _p = await prefs.profile;
     if (_p != null) {
       _profile = _p;
